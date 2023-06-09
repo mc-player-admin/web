@@ -1,5 +1,5 @@
 {
-  "name": "vue",
+  "name": "mc-player-admin-web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -48,5 +48,9 @@
     "typescript": "~5.0.4",
     "vite": "^4.3.5",
     "vue-tsc": "^1.6.4"
-  }
+  },
+  "main": "src/main.ts",
+  "repository": "https://github.com/mc-player-admin/web",
+  "author": "ltfei <ltfei@ltfei.cn> & alongw<alongw@alongw.cn>",
+  "license": "MIT"
 }
