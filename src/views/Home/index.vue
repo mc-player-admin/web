@@ -82,7 +82,6 @@
   </div>
 </template>
 <style lang="less" scoped>
-// @import url(@/assets/style/base.less);
 .home {
   margin: 15px;
   display: grid;
