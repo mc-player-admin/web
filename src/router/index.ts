@@ -25,6 +25,11 @@ const router = createRouter({
           component: () => import('@/pages/Login/LoginMethod/WithCode.vue')
         }
       ]
+    },
+    {
+      path: '/submit',
+      name: 'submit',
+      component: () => import('@/pages/Submit/Submit.vue')
     }
   ]
 })

@@ -6,7 +6,9 @@
       <template #header>
         <div class="card-header">
           <span>申请白名单</span>
-          <el-button type="primary">立即申请</el-button>
+          <router-link to="/submit">
+            <el-button type="primary">立即申请</el-button>
+          </router-link>
         </div>
       </template>
       <div>
