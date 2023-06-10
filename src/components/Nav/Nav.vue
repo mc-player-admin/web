@@ -15,6 +15,7 @@
 
 <style lang="less" scoped>
 .nav {
+  z-index: 10;
   position: sticky;
   top: 0;
   background-color: #fff;
