@@ -21,7 +21,7 @@
       <template #header>
         <div class="card-header">
           <span>玩家查询</span>
-          <el-button type="primary">进入查询</el-button>
+          <el-button type="primary">查看详细</el-button>
         </div>
       </template>
       <div>
