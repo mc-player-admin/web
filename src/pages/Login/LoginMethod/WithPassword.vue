@@ -29,7 +29,7 @@ const formdata = ref({
   <div class="btns">
     <el-button type="primary">登录</el-button>
     <el-button type="info">忘记密码</el-button>
-    <el-button style="float: right">注册账号</el-button>
+    <el-button style="float: right" @click="$router.push('/submit')">注册账号</el-button>
   </div>
 </template>
 
