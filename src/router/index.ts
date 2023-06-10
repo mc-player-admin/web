@@ -11,7 +11,20 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/pages/Login/Login.vue')
+      component: () => import('@/pages/Login/Login.vue'),
+      redirect: '/login/bypassword',
+      children: [
+        {
+          path: '/login/bypassword',
+          name: 'loginbypassword',
+          component: () => import('@/pages/Login/LoginMethod/WithPassword.vue')
+        },
+        {
+          path: '/login/bycode',
+          name: 'loginbycode',
+          component: () => import('@/pages/Login/LoginMethod/WithCode.vue')
+        }
+      ]
     }
   ]
 })

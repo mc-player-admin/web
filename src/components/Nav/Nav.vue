@@ -2,7 +2,7 @@
 
 <template>
   <div class="nav">
-    <div class="title">
+    <div class="title" @click="$router.push('/')">
       <!-- <div class="logo"></div> -->
       <h1>MC-Player-Admin</h1>
     </div>
@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     h1 {
+      font-size: 1rem;
       color: #7764b5;
     }
   }

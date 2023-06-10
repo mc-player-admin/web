@@ -1,1 +1,34 @@
-<template>login</template>
+<script lang="ts" setup></script>
+<template>
+  <div class="login">
+    <div class="login-title">
+      <h1>登录</h1>
+    </div>
+    <div class="login-mode-selete">
+      <el-menu default-active="bypassword" class="el-menu-demo" mode="horizontal" router>
+        <el-menu-item index="bypassword">密码登录</el-menu-item>
+        <el-menu-item index="bycode">验证码登录</el-menu-item>
+        <el-menu-item index="byapp" disabled>小程序登录</el-menu-item>
+        <el-menu-item index="byphoneid" disabled>手机号登录</el-menu-item>
+      </el-menu>
+    </div>
+    <RouterView />
+  </div>
+</template>
+
+<style lang="less" scoped>
+.login {
+  //   background-color: pink;
+  margin: 0 auto;
+  max-width: 600px;
+  .login-title {
+    text-align: center;
+    font-size: 18px;
+    margin: 25px;
+  }
+
+  .login-mode-selete {
+    margin: 25px;
+  }
+}
+</style>
