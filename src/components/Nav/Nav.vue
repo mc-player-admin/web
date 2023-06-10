@@ -7,7 +7,7 @@
       <h1>MC-Player-Admin</h1>
     </div>
     <div class="loginstatus">
-      <a href="javascript:;" v-if="true">您好，请登录</a>
+      <a href="javascript:;" v-if="true" @click="$router.push('/login')">您好，请登录</a>
       <a href="javascript:;" v-else>Admin</a>
     </div>
   </div>
