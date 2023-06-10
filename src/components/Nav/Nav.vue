@@ -22,6 +22,7 @@
   height: 60px;
   padding: 0 25px;
   .title {
+    cursor: pointer;
     display: flex;
     align-items: center;
     h1 {
