@@ -1,5 +1,20 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "esnext",
+    "lib": ["es2019"],
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "types": ["node", "element-plus/global"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -8,7 +23,6 @@
       "path": "./tsconfig.app.json"
     }
   ],
-  "compilerOptions": {
-    "types": ["element-plus/global"]
-  }
+  "include": ["src", "tests", "scripts"],
+  "exclude": ["tests/fixtures"]
 }

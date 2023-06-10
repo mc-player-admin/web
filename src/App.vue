@@ -7,6 +7,4 @@ import Nav from '@/components/Nav/Nav.vue'
   <RouterView />
 </template>
 
-<style lang="less" scoped>
-@import url(@/assets/style/base.less);
-</style>
+<style lang="less" scoped></style>

@@ -32,9 +32,10 @@
   .loginstatus {
     cursor: pointer;
     a {
-      color: #409eff;
+      color: @text-primary-color;
+
       &:hover {
-        color: #ffbfc9;
+        color: @text-primary-hover-color;
       }
     }
   }

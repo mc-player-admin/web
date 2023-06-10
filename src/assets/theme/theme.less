@@ -1,0 +1,11 @@
+/*
+主题处理文件
+所有主题仅定义主色，
+由于要适配element，需要创建两个文件，分别是 theme-name.less theme-name.scss
+随后在当前文件处理颜色，自动生成亮色·暗色等
+*/
+
+@import './main.less';
+@text-primary-color: @primary;
+@text-primary-hover-color: darken(@primary, 10%);
+@text-color: #fff;
