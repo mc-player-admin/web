@@ -51,7 +51,7 @@
       <template #header>
         <div class="card-header">
           <span>服务器状态</span>
-          <el-button type="primary">完整状态</el-button>
+          <el-button type="primary">查看详细</el-button>
         </div>
       </template>
       <!-- <div>这里或许可以放一个状态的预览？</div> -->
