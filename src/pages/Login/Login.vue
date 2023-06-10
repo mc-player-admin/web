@@ -15,8 +15,9 @@ const getPath = () => {
       <el-menu :default-active="getPath()" class="el-menu-demo" mode="horizontal" router>
         <el-menu-item index="bypassword">密码登录</el-menu-item>
         <el-menu-item index="bycode">验证码登录</el-menu-item>
-        <el-menu-item index="byapp" disabled>小程序登录</el-menu-item>
-        <el-menu-item index="byphoneid" disabled>手机号登录</el-menu-item>
+        <el-tooltip class="box-item" effect="dark" content="还没做~" placement="bottom">
+          <el-menu-item index="byapp" disabled>扫码登录</el-menu-item>
+        </el-tooltip>
       </el-menu>
     </div>
     <RouterView />

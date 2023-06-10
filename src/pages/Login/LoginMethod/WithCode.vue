@@ -15,6 +15,9 @@ const mode = ref('bot')
       <el-radio-group v-model="mode" class="ml-4">
         <el-radio label="bot" size="large" aria-checked>机器人验证</el-radio>
         <el-radio label="mail" size="large">邮件验证</el-radio>
+        <el-tooltip class="box-item" effect="dark" content="还没做~" placement="top">
+          <el-radio label="phoneid" size="large" disabled>短信验证</el-radio>
+        </el-tooltip>
       </el-radio-group>
     </div>
 

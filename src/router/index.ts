@@ -30,6 +30,11 @@ const router = createRouter({
       path: '/submit',
       name: 'submit',
       component: () => import('@/pages/Submit/Submit.vue')
+    },
+    {
+      path: '/verify',
+      name: 'verify',
+      component: () => import('@/pages/VerifyQQ/Verify.vue')
     }
   ]
 })
