@@ -11,7 +11,6 @@ const getPath = () => {
     <div class="login-title">
       <h1>登录</h1>
     </div>
-    {{ $route.path }}
     <div class="login-mode-selete">
       <el-menu :default-active="getPath()" class="el-menu-demo" mode="horizontal" router>
         <el-menu-item index="bypassword">密码登录</el-menu-item>
