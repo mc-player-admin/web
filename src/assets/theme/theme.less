@@ -12,3 +12,37 @@
 
 @border-color: #aaa;
 @border-hover-color: @primary;
+
+.screens() {
+  // 超小屏
+  @xs: 0, 320px;
+  // 小屏幕
+  @sm: 320px, 500px;
+  // 中屏幕
+  @md: 500px, 1000px;
+  // 大屏
+  @lg: 1000px;
+}
+
+.screen(@size, @rules) {
+  each(.screens(), .(@value, @key) {
+      & when ("@{key}" = @size) {
+        & when(not (ispixel(@value))) {
+          @media screen and (min-width: extract(@value, 1)) and ( max-width: extract(@value, 2)) {
+            @rules();
+          }
+        }
+        & when(ispixel(@value)) {
+          @media screen and (min-width: extract(@value, 1)) {
+            @rules();
+          }
+        }
+      }
+    });
+}
+
+.min-width(@size, @rules) {
+  @media screen and (max-width: @size) {
+    @rules();
+  }
+}
