@@ -32,6 +32,11 @@ const router = createRouter({
       component: () => import('@/pages/Register/Register.vue')
     },
     {
+      path: '/register/new-account',
+      name: 'NewAccount',
+      component: () => import('@/pages/Register/New.vue')
+    },
+    {
       path: '/submit',
       name: 'submit',
       component: () => import('@/pages/Submit/Submit.vue')
