@@ -1,14 +1,23 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
-
 defineOptions({
   name: 'LoginPage'
 })
 
-// 获取当前路由路径 用于渲染登录方式导航栏
-const getPath = () => {
-  return useRoute().path.slice('/login/'.length)
-}
+const routers = [
+  {
+    index: 'bypassword',
+    text: '密码登录'
+  },
+  {
+    index: 'bycode',
+    text: '验证码登录'
+  },
+  {
+    index: 'byapp',
+    text: '扫码登录',
+    disabled: true
+  }
+]
 </script>
 <template>
   <div class="login">
@@ -16,12 +25,15 @@ const getPath = () => {
       <h1>登录</h1>
     </div>
     <div class="login-mode-selete">
-      <el-menu :default-active="getPath()" class="el-menu-demo" mode="horizontal" router>
-        <el-menu-item index="bypassword">密码登录</el-menu-item>
-        <el-menu-item index="bycode">验证码登录</el-menu-item>
-        <el-tooltip class="box-item" effect="dark" content="还没做~" placement="bottom">
-          <el-menu-item index="byapp" disabled>扫码登录</el-menu-item>
-        </el-tooltip>
+      <el-menu default-active="bypassword" mode="horizontal" router>
+        <el-menu-item
+          v-for="item in routers"
+          :key="item.index"
+          :index="item.index"
+          :disabled="item.disabled"
+        >
+          {{ item.text }}
+        </el-menu-item>
       </el-menu>
     </div>
     <RouterView />
@@ -30,7 +42,6 @@ const getPath = () => {
 
 <style lang="less" scoped>
 .login {
-  //   background-color: pink;
   margin: 0 auto;
   max-width: 600px;
   .login-title {
