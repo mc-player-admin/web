@@ -1,4 +1,8 @@
-<!-- <script lang="ts" setup></script> -->
+<script lang="ts" setup>
+defineOptions({
+  name: 'HomePage'
+})
+</script>
 <template>
   <div class="home">
     <!-- 申请白名单 -->

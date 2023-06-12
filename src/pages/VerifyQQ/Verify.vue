@@ -1,3 +1,9 @@
+<script setup lang="ts">
+defineOptions({
+  name: 'VerifyPage'
+})
+</script>
+
 <template>
   <div class="verify">
     <el-card class="box-card">

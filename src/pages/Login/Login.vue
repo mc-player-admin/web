@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
 
+defineOptions({
+  name: 'LoginPage'
+})
+
 // 获取当前路由路径 用于渲染登录方式导航栏
 const getPath = () => {
   return useRoute().path.slice('/login/'.length)

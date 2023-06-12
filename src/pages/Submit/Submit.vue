@@ -6,7 +6,7 @@ import { File } from 'buffer'
 import { UploadPicture as IconUploadPicture } from '@icon-park/vue-next'
 
 defineOptions({
-  name: 'Submit'
+  name: 'SubmitPage'
 })
 
 const form = reactive({

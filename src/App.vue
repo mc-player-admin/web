@@ -4,7 +4,7 @@ import Nav from '@/components/Nav/Nav.vue'
 
 <template>
   <Nav></Nav>
-  <RouterView />
+  <router-view />
 </template>
 
 <style lang="less" scoped></style>

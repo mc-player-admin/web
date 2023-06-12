@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: 'RegisterPage'
+})
+</script>
 
 <template>
   <div class="register">

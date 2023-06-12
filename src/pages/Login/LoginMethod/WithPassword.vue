@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+defineOptions({
+  name: 'WithPassword'
+})
+
 const formdata = ref({
   username: '',
   password: ''

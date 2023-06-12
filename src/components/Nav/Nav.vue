@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineOptions({
+  name: 'AppNav'
+})
+</script>
 
 <template>
   <div class="nav">
