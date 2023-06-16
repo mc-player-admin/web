@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
+    "axios": "^1.4.0",
     "element-plus": "^2.3.6",
     "less": "^4.1.3",
     "pinia": "^2.0.36",

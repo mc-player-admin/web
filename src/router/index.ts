@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('@/pages/Login/Login.vue')
     },
     {
+      path: '/login/qqAccessCallback',
+      name: 'login',
+      component: () => import('@/pages/QqAccessCallback/QqAccessCallback.vue')
+    },
+    {
       path: '/register',
       name: 'register',
       component: () => import('@/pages/Register/Register.vue')
