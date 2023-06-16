@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import BasicSsl from '@vitejs/plugin-basic-ssl'
-
+import Inspect from 'vite-plugin-inspect'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -26,7 +26,8 @@ export default defineConfig(({ mode }) => {
       }),
       ElementPlus({
         useSource: true
-      })
+      }),
+      Inspect()
     ],
     resolve: {
       alias: {
