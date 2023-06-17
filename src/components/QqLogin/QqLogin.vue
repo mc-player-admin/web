@@ -29,7 +29,7 @@ const init = async () => {
 }
 init()
 const href = computed(() => {
-  if (!argument.value || !iserr.value) {
+  if (!argument.value || iserr.value) {
     return
   }
   const href = new URL('https://graph.qq.com/oauth2.0/authorize ')
