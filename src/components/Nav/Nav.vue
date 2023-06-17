@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import QqLogin from '../QqLogin/QqLogin.vue'
 defineOptions({
   name: 'AppNav'
 })
@@ -12,9 +11,8 @@ defineOptions({
       <h1>MC-Player-Admin</h1>
     </div>
     <div class="loginstatus">
-      <qq-login>登录</qq-login>
-      <!-- <router-link v-if="true" to="/login">您好，请登录</router-link>
-      <a v-else>Admin</a> -->
+      <router-link v-if="true" to="/login">您好，请登录</router-link>
+      <a v-else>Admin</a>
     </div>
   </div>
 </template>

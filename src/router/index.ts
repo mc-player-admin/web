@@ -15,7 +15,7 @@ const router = createRouter({
     },
     {
       path: '/login/qqAccessCallback',
-      name: 'login',
+      name: 'loginCallback',
       component: () => import('@/pages/QqAccessCallback/QqAccessCallback.vue')
     },
     {

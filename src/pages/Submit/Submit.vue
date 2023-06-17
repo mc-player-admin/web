@@ -88,6 +88,7 @@ const submitForm = (formEl?: FormInstance) => {
   padding: 10px 20px;
   box-sizing: border-box;
   margin: 0 auto;
+  background-color: #fff;
 }
 .uploader {
   :deep(.el-upload) {
