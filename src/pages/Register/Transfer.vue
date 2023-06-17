@@ -2,8 +2,6 @@
 import type { FormInstance, FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
 
-// todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
-
 defineOptions({
   name: 'RegisterNew'
 })
@@ -11,6 +9,7 @@ defineOptions({
 const formRef = ref<FormInstance>()
 const form = reactive({
   qq: null,
+  name: null,
   code: null
 })
 
@@ -27,6 +26,20 @@ const rules = reactive<FormRules>({
       validator(rule, value) {
         return /^[1-9][0-9]{4,10}$/.test(value)
       }
+    }
+  ],
+  name: [
+    // todo: 游戏id验证规则
+    {
+      required: true,
+      trigger: 'blur',
+      message: '请输入游戏id'
+    },
+    {
+      min: 2,
+      max: 10,
+      trigger: 'blur',
+      message: 'id要求2~10个字符'
     }
   ],
   code: [
@@ -56,15 +69,18 @@ const submitForm = async () => {
   <el-form
     label-position="right"
     label-width="80px"
-    class="register_new_form"
+    class="register_transfer_form"
     :model="form"
     :rules="rules"
     ref="formRef"
     status-icon
   >
-    <h1 class="title">完善信息</h1>
+    <h1 class="title">账号迁移</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />
+    </el-form-item>
+    <el-form-item label="游戏ID" prop="name">
+      <el-input v-model="form.name" name="name" placeholder="请填写游戏id，注意空格及大小写" />
     </el-form-item>
     <el-form-item label="邮箱" class="email">
       <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />

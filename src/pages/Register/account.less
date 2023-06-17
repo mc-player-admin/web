@@ -1,0 +1,27 @@
+.register_new_form,
+.register_transfer_form {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  background-color: #fff;
+  .title {
+    font-size: 22px;
+    margin: 20px 0 40px 60px;
+    text-align: center;
+  }
+  :deep(.el-form-item__content) {
+    display: flex;
+    flex-flow: row;
+    .send_code {
+      margin-left: 8px;
+    }
+  }
+  .min-width(600px, {
+    :deep(.el-form-item) {
+      flex-flow: column nowrap;
+      .el-form-item__label {
+        justify-content: flex-start;
+      }
+    }
+  });
+}

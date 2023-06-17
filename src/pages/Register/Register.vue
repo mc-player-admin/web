@@ -51,9 +51,12 @@ defineOptions({
     padding: 20px 0;
     transition: all 0.5s;
     color: @text-color;
+    background-color: #fff;
+    box-shadow: 0 5px 10px 0 #bdbdbd6c;
 
     &:hover {
       transform: translateY(-10px);
+      box-shadow: 0 5px 20px 0 #bdbdbd6c;
       .icon img {
         transform: scale(1.2);
       }

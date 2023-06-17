@@ -29,6 +29,11 @@ const router = createRouter({
       component: () => import('@/pages/Register/New.vue')
     },
     {
+      path: '/register/transfer-account',
+      name: 'TransferAccount',
+      component: () => import('@/pages/Register/Transfer.vue')
+    },
+    {
       path: '/submit',
       name: 'submit',
       component: () => import('@/pages/Submit/Submit.vue')
