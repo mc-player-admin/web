@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { AxiosResponse } from 'axios'
 import router from '@/router/index'
 
 axios.defaults.baseURL = import.meta.env.VITE_HTTP_BASE_URL
@@ -38,5 +39,7 @@ axios.interceptors.response.use(
     return Promise.reject(err)
   }
 )
+
+export type Response<T = any> = Promise<AxiosResponse<{ status: number; data: T }>>
 
 export default axios
