@@ -6,7 +6,7 @@ import { File } from 'buffer'
 import { UploadPicture as IconUploadPicture } from '@icon-park/vue-next'
 
 defineOptions({
-  name: 'Submit'
+  name: 'SubmitPage'
 })
 
 const form = reactive({
@@ -88,6 +88,7 @@ const submitForm = (formEl?: FormInstance) => {
   padding: 10px 20px;
   box-sizing: border-box;
   margin: 0 auto;
+  background-color: #fff;
 }
 .uploader {
   :deep(.el-upload) {

@@ -11,20 +11,27 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/pages/Login/Login.vue'),
-      redirect: '/login/bypassword',
-      children: [
-        {
-          path: '/login/bypassword',
-          name: 'loginbypassword',
-          component: () => import('@/pages/Login/LoginMethod/WithPassword.vue')
-        },
-        {
-          path: '/login/bycode',
-          name: 'loginbycode',
-          component: () => import('@/pages/Login/LoginMethod/WithCode.vue')
-        }
-      ]
+      component: () => import('@/pages/Login/Login.vue')
+    },
+    {
+      path: '/login/qqAccessCallback',
+      name: 'loginCallback',
+      component: () => import('@/pages/QqAccessCallback/QqAccessCallback.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/pages/Register/Register.vue')
+    },
+    {
+      path: '/register/new-account',
+      name: 'NewAccount',
+      component: () => import('@/pages/Register/New.vue')
+    },
+    {
+      path: '/register/transfer-account',
+      name: 'TransferAccount',
+      component: () => import('@/pages/Register/Transfer.vue')
     },
     {
       path: '/submit',
