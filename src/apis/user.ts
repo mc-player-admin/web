@@ -1,3 +1,5 @@
+import type { UserInfo } from '@/types/user'
+import type { Response } from '@/utils/request'
 import request from '@/utils/request'
 
 export const loginInit = () => {
@@ -15,5 +17,12 @@ export const login = (code: string, state: string) => {
       code,
       state
     }
+  })
+}
+
+export const getUserInfo = (): Response<UserInfo> => {
+  return request({
+    method: 'post',
+    url: '/user/getUserInfo'
   })
 }
