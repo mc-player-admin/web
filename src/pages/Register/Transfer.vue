@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
+import SendCode from '@/components/SendCode/SendCode.vue'
 
 defineOptions({
   name: 'RegisterNew'
@@ -84,7 +85,7 @@ const submitForm = async () => {
     </el-form-item>
     <el-form-item label="邮箱" class="email">
       <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
-      <el-button class="send_code" type="primary">发送验证码</el-button>
+      <send-code :qq="form.qq" />
     </el-form-item>
     <el-form-item label="验证码" prop="code">
       <el-input v-model="form.code" name="code" />

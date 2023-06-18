@@ -26,3 +26,16 @@ export const getUserInfo = (): Response<UserInfo> => {
     url: '/user/getUserInfo'
   })
 }
+
+/**
+ * 获取邮箱验证码
+ * @param mail qq号
+ * @returns
+ */
+export const getCode = (mail: string) => {
+  return request({
+    method: 'post',
+    url: '/user/getCode/mail',
+    data: { mail }
+  })
+}
