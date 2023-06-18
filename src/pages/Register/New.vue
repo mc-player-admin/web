@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
 import SendCode from '@/components/SendCode/SendCode.vue'
+import { registerNew } from '@/apis/user'
+import { useRouter } from 'vue-router'
 
 // todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
 
 defineOptions({
   name: 'RegisterNew'
 })
-
+const router = useRouter()
 const formRef = ref<FormInstance>()
 const form = reactive({
-  qq: null,
-  code: null
+  qq: '',
+  code: ''
 })
 
 const rules = reactive<FormRules>({
@@ -43,12 +45,16 @@ const rules = reactive<FormRules>({
 
 const submitForm = async () => {
   if (!formRef.value) return
-  await formRef.value.validate((valid, fields) => {
-    if (valid) {
-      console.log('submit!')
-    } else {
-      console.log('error submit!', fields)
+  await formRef.value.validate(async (valid, fields) => {
+    if (!valid) {
+      return console.log('error submit!', fields)
     }
+    const { data: res } = await registerNew(form.qq, form.code)
+    if (res.status != 200) {
+      ElMessage.success('提交失败，请稍后再试')
+    }
+    ElMessage.success('提交成功')
+    router.push('/')
   })
 }
 </script>

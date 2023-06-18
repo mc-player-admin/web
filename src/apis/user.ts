@@ -39,3 +39,14 @@ export const getCode = (mail: string) => {
     data: { mail }
   })
 }
+
+export const registerNew = (qq: string, code: string) => {
+  return request({
+    method: 'post',
+    url: '/user/register/new',
+    data: {
+      qq,
+      code
+    }
+  })
+}
