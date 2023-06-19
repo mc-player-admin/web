@@ -24,4 +24,16 @@
       }
     }
   });
+  .email :deep(.el-form-item__content) {
+    display: flex;
+    flex-direction: column;
+    .email_connect {
+      width: 100%;
+      display: flex;
+    }
+    .tips {
+      align-self: flex-end;
+      color: @primary;
+    }
+  }
 }

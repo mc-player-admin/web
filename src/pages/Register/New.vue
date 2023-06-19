@@ -51,7 +51,7 @@ const submitForm = async () => {
     }
     const { data: res } = await registerNew(form.qq, form.code)
     if (res.status != 200) {
-      ElMessage.success('提交失败，请稍后再试')
+      return ElMessage.error('提交失败，' + (res.msg ? res.msg : '请稍后再试'))
     }
     ElMessage.success('提交成功')
     router.push('/')
@@ -74,8 +74,12 @@ const submitForm = async () => {
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />
     </el-form-item>
     <el-form-item label="邮箱" class="email">
-      <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
-      <send-code :qq="form.qq" />
+      <div class="email_connect">
+        <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
+        <send-code :qq="form.qq" />
+      </div>
+      <!-- todo: 发送验证码之后显示 跳转到文档 -->
+      <a href="#" class="tips" v-if="false">收不到验证码？</a>
     </el-form-item>
     <el-form-item label="验证码" prop="code">
       <el-input v-model="form.code" name="code" />
