@@ -50,3 +50,25 @@ export const registerNew = (qq: string, code: string) => {
     }
   })
 }
+export const registerTransfer = (qq: string, code: string, name: string) => {
+  return request({
+    method: 'post',
+    url: '/user/register/transfer',
+    data: {
+      qq,
+      code,
+      name
+    }
+  })
+}
+
+export const checkName = (qq: string, name: string) => {
+  return request({
+    method: 'post',
+    url: '/user/register/transfer/queryName',
+    data: {
+      qq,
+      name
+    }
+  })
+}

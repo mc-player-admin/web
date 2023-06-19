@@ -9,11 +9,21 @@ defineOptions({
 const props = defineProps<{
   qq: string | null
 }>()
+const loading = ref(false)
 
 const time = ref(0)
 const sendCode = async () => {
   if (!props.qq || !/^[1-9][0-9]{4,10}$/.test(props.qq)) {
     return ElMessage.warning('请填写正确的qq号')
+  }
+
+  loading.value = true
+  const { data: res } = await getCode(props.qq)
+  loading.value = false
+  if (res.status == 200) {
+    ElMessage.success('发送成功')
+  } else {
+    ElMessage.error('发送失败，请稍后再试')
   }
 
   time.value = 60
@@ -23,18 +33,17 @@ const sendCode = async () => {
     }
     time.value--
   }, 1000)
-
-  const { data: res } = await getCode(props.qq)
-  if (res.status == 200) {
-    ElMessage.success('发送成功')
-  } else {
-    ElMessage.error('发送失败，请稍后再试')
-  }
 }
 </script>
 
 <template>
-  <el-button class="send_code" type="primary" :disabled="time !== 0" @click="sendCode">
+  <el-button
+    class="send_code"
+    type="primary"
+    :disabled="time !== 0"
+    :loading="loading"
+    @click="sendCode"
+  >
     {{ time == 0 ? '发送验证码' : `${time} 秒后重试` }}
   </el-button>
 </template>
