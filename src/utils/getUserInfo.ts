@@ -1,4 +1,4 @@
-import { getUserInfo as getUserInfoApi } from '@/apis/getUserInfo'
+import { getUserInfo as getUserInfoApi } from '@/apis/user'
 import { useUserStore } from '@/store/store'
 
 export const getUserInfo = async () => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { loginInit as loginInitApi } from '@/apis/login'
+import { loginInit as loginInitApi } from '@/apis/user'
 import { ElMessage } from 'element-plus'
 
 const iserr = ref(true)

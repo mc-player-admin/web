@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { login as loginApi } from '@/apis/login'
+import { login as loginApi } from '@/apis/user'
 import { ElMessage } from 'element-plus'
 
 const route = useRoute()
