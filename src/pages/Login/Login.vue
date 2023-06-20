@@ -55,6 +55,7 @@ defineOptions({
       }
     }
     .qq-login {
+      cursor: pointer;
       background-color: #0093f5;
     }
     .any-login {
