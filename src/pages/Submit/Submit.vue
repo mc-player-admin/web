@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import type { FormInstance, UploadProps } from 'element-plus'
+import type { FormInstance, FormRules, UploadProps } from 'element-plus'
 import { File } from 'buffer'
 import { UploadPicture as IconUploadPicture } from '@icon-park/vue-next'
+import { useUserStore } from '@/store/store'
+import { throttle } from 'lodash'
+import { checkName as checkNameApi } from '@/apis/audit'
 
 defineOptions({
   name: 'SubmitPage'
 })
 
+const user = useUserStore()
 const form = reactive({
-  qq: '123456',
-  email: '123456@qq.com',
   name: '',
   biliUsername: '',
   biliUid: '',
@@ -19,6 +21,76 @@ const form = reactive({
 })
 
 const formRef = ref<FormInstance>()
+
+const rules = reactive<FormRules>({
+  name: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '请输入游戏id'
+    },
+    {
+      trigger: 'blur',
+      message: '请输入正确的游戏id',
+      validator(rule, value) {
+        return /^([a-zA-Z])([a-zA-Z0-9 ]{1,14})$/.test(value)
+      }
+    },
+    {
+      validator: throttle(
+        (rule, value, cb) => {
+          if (!user.userInfo?.qq) {
+            return cb('qq号错误')
+          }
+          checkNameApi(user.userInfo.qq.toString(), value).then((e) => {
+            if (e.data.status == 200) {
+              cb()
+            } else {
+              cb(e.data.msg || '该id不可用')
+            }
+          })
+        },
+        1000,
+        {
+          leading: false
+        }
+      )
+    }
+  ],
+  biliUsername: [
+    {
+      required: true,
+      message: '请输入用户名',
+      trigger: ['input', 'blur']
+    },
+    {
+      max: 20,
+      message: '用户名过长',
+      trigger: ['input', 'blur']
+    }
+  ],
+  biliUid: [
+    {
+      validator(rule, value: string) {
+        if (!value) {
+          return new Error('请填写uid')
+        } else if (!/^[1-9][0-9]{0,19}$/.test(value)) {
+          return new Error('请输入正确的uid')
+        }
+        return true
+      },
+      required: true,
+      trigger: ['input', 'blur']
+    }
+  ],
+  screenshot: [
+    {
+      required: true,
+      message: '请上传粉丝牌截图',
+      trigger: ['upload']
+    }
+  ]
+})
 
 const handleUploadSuccess: UploadProps['onSuccess'] = (response) => {
   form.screenshot = response.xxx
@@ -45,23 +117,23 @@ const submitForm = (formEl?: FormInstance) => {
 
 <template>
   <div class="submit">
-    <el-form :model="form" label-position="top" ref="formRef">
+    <el-form :model="form" label-position="top" ref="formRef" :rules="rules" status-icon>
       <el-form-item label="qq">
-        <el-input v-model="form.qq" disabled />
+        <el-input :value="user.userInfo?.qq" disabled />
       </el-form-item>
       <el-form-item label="邮箱">
-        <el-input v-model="form.email" disabled />
+        <el-input :value="user.userInfo?.primary_email" disabled />
       </el-form-item>
-      <el-form-item label="游戏id">
+      <el-form-item label="游戏id" prop="name">
         <el-input v-model="form.name" placeholder="务必确认空格及大小写是否填写正确" />
       </el-form-item>
-      <el-form-item label="B站用户名">
+      <el-form-item label="B站用户名" prop="biliUsername">
         <el-input v-model="form.biliUsername" placeholder="请填写B站用户名" />
       </el-form-item>
-      <el-form-item label="B站uid">
-        <el-input v-model="form.biliUsername" placeholder="请填写B站uid" />
+      <el-form-item label="B站uid" prop="biliUid">
+        <el-input v-model="form.biliUid" placeholder="请填写B站uid" />
       </el-form-item>
-      <el-form-item label="B站粉丝牌截图">
+      <el-form-item label="B站粉丝牌截图" prop="screenshot">
         <el-upload
           class="uploader"
           action="#"
