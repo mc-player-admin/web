@@ -11,3 +11,14 @@ export const checkName = (qq: string, name: string) => {
     }
   })
 }
+
+export const upload = (file: File) => {
+  return request({
+    method: 'post',
+    url: '/audit/upload',
+    data: {
+      file
+    },
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+}
