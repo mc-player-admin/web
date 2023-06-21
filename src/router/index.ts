@@ -42,6 +42,18 @@ const router = createRouter({
       path: '/verify',
       name: 'verify',
       component: () => import('@/pages/VerifyQQ/Verify.vue')
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: () => import('@/pages/Account/Account.vue'),
+      children: [
+        {
+          path: '',
+          name: 'Home',
+          component: () => import('@/pages/Account/Home/Home.vue')
+        }
+      ]
     }
   ]
 })
