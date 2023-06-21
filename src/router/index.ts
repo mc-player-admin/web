@@ -54,6 +54,11 @@ const router = createRouter({
           component: () => import('@/pages/Account/Home/Home.vue')
         }
       ]
+    },
+    {
+      path: '/inquire',
+      name: 'Inquire',
+      component: () => import('@/pages/Inquire/Inquire.vue')
     }
   ]
 })

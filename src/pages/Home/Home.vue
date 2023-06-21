@@ -27,7 +27,9 @@ defineOptions({
       <template #header>
         <div class="card-header">
           <span>玩家查询</span>
-          <el-button type="primary">查询信息</el-button>
+          <router-link to="/inquire">
+            <el-button type="primary">查询信息</el-button>
+          </router-link>
         </div>
       </template>
       <div>
