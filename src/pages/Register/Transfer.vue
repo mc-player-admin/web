@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref } from 'vue'
 import SendCode from '@/components/SendCode/SendCode.vue'
-import { throttle } from '@/utils/throttle'
+import { throttle } from 'lodash'
 import { checkName as checkNameApi, registerTransfer } from '@/apis/user'
 import { useRouter } from 'vue-router'
 
@@ -23,28 +23,6 @@ const nameRules = reactive<{
   validateStatus: '',
   error: ''
 })
-const checkName = throttle(async () => {
-  nameRules.validateStatus = 'validating'
-  nameRules.error = undefined
-  const { data: res } = await checkNameApi(form.qq, form.name)
-  if (res.status == 200) {
-    nameRules.validateStatus = 'success'
-    nameRules.error = ''
-  } else {
-    nameRules.validateStatus = 'error'
-    if (res.msg) {
-      nameRules.error = res.msg
-    } else {
-      nameRules.error = '未找到已有ID，请确认QQ和游戏ID填写正确'
-    }
-  }
-}, 1000)
-watch([() => form.qq, () => form.name], () => {
-  if (!form.name) {
-    return
-  }
-  checkName()
-})
 
 const rules = reactive<FormRules>({
   qq: [
@@ -62,7 +40,6 @@ const rules = reactive<FormRules>({
     }
   ],
   name: [
-    // todo: 游戏id验证规则
     {
       required: true,
       trigger: 'blur',
@@ -76,14 +53,24 @@ const rules = reactive<FormRules>({
       }
     },
     {
-      trigger: 'blur',
-      message: '请输入正确的游戏id',
-      // 由于需要调用api节流异步验证，通过watch监听
-      // 此处防止其他规则覆盖为正确
-      validator() {
-        checkName()
-        return true
-      }
+      validator: throttle(
+        (rule, value, cb) => {
+          if (!form.qq) {
+            return cb('请先填写QQ')
+          }
+          checkNameApi(form.qq, form.name).then(({ data: res }) => {
+            if (res.status == 200) {
+              cb()
+            } else {
+              cb(res.msg || '未找到已有ID，请确认QQ和游戏ID填写正确')
+            }
+          })
+        },
+        1000,
+        {
+          leading: false
+        }
+      )
     }
   ],
   code: [
