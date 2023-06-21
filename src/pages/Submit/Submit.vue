@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import type { FormInstance, FormRules, UploadProps } from 'element-plus'
+import type { FormInstance, FormRules, UploadProps, UploadRequestOptions } from 'element-plus'
 import { File } from 'buffer'
 import { UploadPicture as IconUploadPicture } from '@icon-park/vue-next'
 import { useUserStore } from '@/store/store'
 import { throttle } from 'lodash'
-import { checkName as checkNameApi } from '@/apis/audit'
+import { checkName as checkNameApi, upload as uploadApi } from '@/apis/audit'
 
 defineOptions({
   name: 'SubmitPage'
@@ -92,13 +92,15 @@ const rules = reactive<FormRules>({
   ]
 })
 
-const handleUploadSuccess: UploadProps['onSuccess'] = (response) => {
-  form.screenshot = response.xxx
+const handleUploadSuccess: UploadProps['onSuccess'] = ({ data: res }) => {
+  if (res.status != 200) {
+    return ElMessage.error('上传失败,', res.msg ? res.msg : '请稍后再试')
+  }
+  // todo: 图片host
+  form.screenshot = '//' + res.data.Location
 }
 // @ts-ignore
 const beforeUpload: UploadProps['beforeUpload'] = (rawFile: File) => {
-  console.log(rawFile.type)
-
   if (!['image/jpeg', 'image/png'].includes(rawFile.type)) {
     ElMessage.error('仅允许上传 jpg 和 png 格式的图片')
     return false
@@ -107,6 +109,10 @@ const beforeUpload: UploadProps['beforeUpload'] = (rawFile: File) => {
     return false
   }
   return true
+}
+
+const upload = (options: UploadRequestOptions) => {
+  return uploadApi(options.file)
 }
 
 const submitForm = (formEl?: FormInstance) => {
@@ -136,12 +142,12 @@ const submitForm = (formEl?: FormInstance) => {
       <el-form-item label="B站粉丝牌截图" prop="screenshot">
         <el-upload
           class="uploader"
-          action="#"
           :show-file-list="false"
+          :http-request="upload"
           :on-success="handleUploadSuccess"
           :before-upload="beforeUpload"
         >
-          <img v-if="form.screenshot" :src="form.screenshot" class="avatar" />
+          <img v-if="form.screenshot" :src="form.screenshot" class="uploader-image" />
           <el-icon v-else class="uploader-icon">
             <icon-upload-picture size="500" />
           </el-icon>
@@ -170,15 +176,19 @@ const submitForm = (formEl?: FormInstance) => {
     position: relative;
     overflow: hidden;
     transition: 0.5s;
+    width: 150px;
+    height: 150px;
     &:hover {
       border-color: @border-hover-color;
     }
     .el-icon.uploader-icon {
       font-size: 28px;
       color: #8c939d;
-      width: 150px;
-      height: 150px;
       text-align: center;
+    }
+    .uploader-image {
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 }
