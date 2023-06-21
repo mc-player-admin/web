@@ -16,7 +16,7 @@ const userStore = useUserStore()
     </div>
     <div class="loginstatus">
       <router-link v-if="!userStore.isLogin" to="/login">您好，请登录</router-link>
-      <a v-else>{{ userStore.userInfo?.username }}</a>
+      <router-link v-else to="/account">您好，{{ userStore.userInfo?.username }}</router-link>
     </div>
   </div>
 </template>
