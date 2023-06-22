@@ -39,6 +39,21 @@ defineOptions({
       </div>
     </el-card>
 
+    <!-- 下载游戏 -->
+    <el-card class="box-card" shadow="hover">
+      <template #header>
+        <div class="card-header">
+          <span>下载游戏</span>
+          <el-button type="primary">立即下载</el-button>
+        </div>
+      </template>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
+        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
+        delectus vero, assumenda impedit praesentium iure.
+      </div>
+    </el-card>
+
     <!-- 常见问题 -->
     <el-card class="box-card" shadow="hover">
       <template #header>
