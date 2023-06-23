@@ -22,3 +22,23 @@ export const upload = (file: File) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
 }
+
+export const init = () => {
+  return request({
+    method: 'post',
+    url: '/audit/submit/init'
+  })
+}
+
+export const submit = (data: {
+  name: string
+  biliUsername: string
+  biliUid: string
+  screenshot: string
+}) => {
+  return request({
+    method: 'post',
+    url: '/audit/submit',
+    data
+  })
+}

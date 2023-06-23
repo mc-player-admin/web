@@ -6,7 +6,12 @@ import { File } from 'buffer'
 import { UploadPicture as IconUploadPicture } from '@icon-park/vue-next'
 import { useUserStore } from '@/store/store'
 import { throttle } from 'lodash'
-import { checkName as checkNameApi, upload as uploadApi } from '@/apis/audit'
+import {
+  checkName as checkNameApi,
+  upload as uploadApi,
+  init as initApi,
+  submit as submitApi
+} from '@/apis/audit'
 
 defineOptions({
   name: 'SubmitPage'
@@ -19,6 +24,14 @@ const form = reactive({
   biliUid: '',
   screenshot: ''
 })
+
+const init = async () => {
+  const { data: res } = await initApi()
+  if (res.status != 200) {
+    ElMessage.error(res.msg)
+  }
+}
+init()
 
 const formRef = ref<FormInstance>()
 
@@ -117,7 +130,15 @@ const upload = (options: UploadRequestOptions) => {
 
 const submitForm = (formEl?: FormInstance) => {
   if (!formEl) return
-  // todo: 提交
+  formEl.validate(async (valid) => {
+    if (!valid) {
+      return
+    }
+    const { data: res } = await submitApi(form)
+    if (res.status != 200) {
+      ElMessage.error('提交失败,' + (res.msg ? res.msg : '请稍后再试'))
+    }
+  })
 }
 </script>
 
