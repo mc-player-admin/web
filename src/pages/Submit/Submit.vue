@@ -12,24 +12,31 @@ import {
   init as initApi,
   submit as submitApi
 } from '@/apis/audit'
+import { useRouter } from 'vue-router'
 
 defineOptions({
   name: 'SubmitPage'
 })
 
 const user = useUserStore()
+const router = useRouter()
 const form = reactive({
   name: '',
   biliUsername: '',
   biliUid: '',
   screenshot: ''
 })
+const host = ref('//')
 
 const init = async () => {
   const { data: res } = await initApi()
   if (res.status != 200) {
     ElMessage.error(res.msg)
+    if (res.status == 4031) {
+      router.push('/register')
+    }
   }
+  host.value = res.data?.host
 }
 init()
 
@@ -55,7 +62,7 @@ const rules = reactive<FormRules>({
           if (!user.userInfo?.qq) {
             return cb('qq号错误')
           }
-          checkNameApi(user.userInfo.qq.toString(), value).then((e) => {
+          checkNameApi(value).then((e) => {
             if (e.data.status == 200) {
               cb()
             } else {
@@ -109,8 +116,7 @@ const handleUploadSuccess: UploadProps['onSuccess'] = ({ data: res }) => {
   if (res.status != 200) {
     return ElMessage.error('上传失败,', res.msg ? res.msg : '请稍后再试')
   }
-  // todo: 图片host
-  form.screenshot = '//' + res.data.Location
+  form.screenshot = res.data.fileName
 }
 // @ts-ignore
 const beforeUpload: UploadProps['beforeUpload'] = (rawFile: File) => {
@@ -138,6 +144,8 @@ const submitForm = (formEl?: FormInstance) => {
     if (res.status != 200) {
       ElMessage.error('提交失败,' + (res.msg ? res.msg : '请稍后再试'))
     }
+    ElMessage.success('提交成功，请等待审核')
+    router.push('/')
   })
 }
 </script>
@@ -168,7 +176,7 @@ const submitForm = (formEl?: FormInstance) => {
           :on-success="handleUploadSuccess"
           :before-upload="beforeUpload"
         >
-          <img v-if="form.screenshot" :src="form.screenshot" class="uploader-image" />
+          <img v-if="form.screenshot" :src="host + form.screenshot" class="uploader-image" />
           <el-icon v-else class="uploader-icon">
             <icon-upload-picture size="500" />
           </el-icon>

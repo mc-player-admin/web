@@ -1,12 +1,11 @@
 // import type { Response } from '@/utils/request'
 import request from '@/utils/request'
 
-export const checkName = (qq: string, name: string) => {
+export const checkName = (name: string) => {
   return request({
     method: 'post',
     url: '/audit/submit/checkName',
     data: {
-      qq,
       name
     }
   })
