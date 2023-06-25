@@ -8,3 +8,8 @@ export interface UserInfo {
   last_login_date?: Date
   primary_premission_group: number
 }
+
+export interface Premission {
+  name: string
+  value: boolean
+}

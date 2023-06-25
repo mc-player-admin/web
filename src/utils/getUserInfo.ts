@@ -8,7 +8,8 @@ export const getUserInfo = async () => {
     const { data: res } = await getUserInfoApi()
     if (res.status == 200) {
       userStore.isLogin = true
-      userStore.userInfo = res.data
+      userStore.userInfo = res.data.userinfo
+      userStore.premission = res.data.premission
     }
   }
 }

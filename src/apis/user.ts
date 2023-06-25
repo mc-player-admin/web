@@ -1,4 +1,4 @@
-import type { UserInfo } from '@/types/user'
+import type { UserInfo, Premission } from '@/types/user'
 import type { Response } from '@/utils/request'
 import request from '@/utils/request'
 
@@ -20,7 +20,10 @@ export const login = (code: string, state: string) => {
   })
 }
 
-export const getUserInfo = (): Response<UserInfo> => {
+export const getUserInfo = (): Response<{
+  userinfo: UserInfo
+  premission: Premission[]
+}> => {
   return request({
     method: 'post',
     url: '/user/getUserInfo'
