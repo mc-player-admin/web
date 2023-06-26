@@ -71,5 +71,8 @@ init()
 .audit {
   width: 100%;
   height: 100%;
+  :deep(.el-table__cell) {
+    z-index: unset !important;
+  }
 }
 </style>
