@@ -9,7 +9,7 @@ export const getUserInfo = async () => {
     if (res.status == 200) {
       userStore.isLogin = true
       userStore.userInfo = res.data.userinfo
-      userStore.premission = res.data.premission
+      userStore.permission = res.data.permission
     }
   }
 }

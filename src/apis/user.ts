@@ -1,4 +1,4 @@
-import type { UserInfo, Premission } from '@/types/user'
+import type { UserInfo, permission } from '@/types/user'
 import type { Response } from '@/utils/request'
 import request from '@/utils/request'
 
@@ -22,7 +22,7 @@ export const login = (code: string, state: string) => {
 
 export const getUserInfo = (): Response<{
   userinfo: UserInfo
-  premission: Premission[]
+  permission: permission[]
 }> => {
   return request({
     method: 'post',

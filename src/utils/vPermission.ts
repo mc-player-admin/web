@@ -2,8 +2,8 @@ import { watch, type Directive, nextTick } from 'vue'
 import { useUserStore } from '@/store/store'
 
 /**
- * # v-premission
- * 传入 `premission` 字符串
+ * # v-permission
+ * 传入 `permission` 字符串
  * 匹配 `userStore` 中的权限将元素展示/隐藏
  */
 export default {
@@ -12,17 +12,17 @@ export default {
     el.style.setProperty('display', 'none')
     const userStore = useUserStore()
     watch(
-      () => userStore.premission,
+      () => userStore.permission,
       (value) => {
-        const premission = value.find((e) => {
+        const permission = value.find((e) => {
           return e.name == binding.value
         })
         // 有权限 展示
-        if (premission?.value) {
+        if (permission?.value) {
           el.style.removeProperty('display')
         } else {
           // 没权限 替换
-          const comment = document.createComment('v-premission')
+          const comment = document.createComment('v-permission')
           nextTick(() => {
             if (el.parentNode) {
               el.parentNode.replaceChild(comment, el)

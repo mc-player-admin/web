@@ -6,10 +6,10 @@ export interface UserInfo {
   status: number
   register_date: string
   last_login_date?: Date
-  primary_premission_group: number
+  primary_permission_group: number
 }
 
-export interface Premission {
+export interface permission {
   name: string
   value: boolean
 }

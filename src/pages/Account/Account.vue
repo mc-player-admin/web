@@ -3,10 +3,13 @@ import {
   Home as IconHome,
   User as IconUser,
   Help as IconHelp,
-  Experiment as IconExperiment
+  Experiment as IconExperiment,
+  EveryUser as IconEveryUser,
+  UserBusiness as IconUserBusiness,
+  Permissions as IconPermissions
 } from '@icon-park/vue-next'
 import { ref } from 'vue'
-import vPremission from '@/utils/vPremission'
+import vPermission from '@/utils/vPermission'
 
 defineOptions({
   name: 'AccountPage'
@@ -30,13 +33,21 @@ const collapse = ref(false)
         <span>问题反馈</span>
       </el-menu-item>
 
-      <el-menu-item index="issues" v-premission="'admin.audit'">
+      <el-menu-item index="issues" v-permission="'admin.audit'">
         <el-icon><icon-help /></el-icon>
         <span>审核</span>
       </el-menu-item>
-      <el-menu-item index="issues" v-premission="'admin.edit_userinfo'">
-        <el-icon><icon-help /></el-icon>
-        <span>修改用户信息</span>
+      <el-menu-item index="issues" v-permission="'admin.edit_userinfo'">
+        <el-icon><icon-every-user /></el-icon>
+        <span>用户管理</span>
+      </el-menu-item>
+      <el-menu-item index="issues" v-permission="'admin.edit_player'">
+        <el-icon><icon-user-business /></el-icon>
+        <span>玩家管理</span>
+      </el-menu-item>
+      <el-menu-item index="issues" v-permission="'admin.edit_player'">
+        <el-icon><icon-permissions /></el-icon>
+        <span>权限管理</span>
       </el-menu-item>
 
       <el-sub-menu index="" title="实验功能" disabled>
