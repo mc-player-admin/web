@@ -33,19 +33,19 @@ const collapse = ref(false)
         <span>问题反馈</span>
       </el-menu-item>
 
-      <el-menu-item index="issues" v-permission="'admin.audit'">
+      <el-menu-item index="/account/admin-audit" v-permission="'admin.audit'">
         <el-icon><icon-help /></el-icon>
         <span>审核</span>
       </el-menu-item>
-      <el-menu-item index="issues" v-permission="'admin.edit_userinfo'">
+      <el-menu-item index="/account/admin-edit_userinfo" v-permission="'admin.edit_userinfo'">
         <el-icon><icon-every-user /></el-icon>
         <span>用户管理</span>
       </el-menu-item>
-      <el-menu-item index="issues" v-permission="'admin.edit_player'">
+      <el-menu-item index="/account/admin-edit_player" v-permission="'admin.edit_player'">
         <el-icon><icon-user-business /></el-icon>
         <span>玩家管理</span>
       </el-menu-item>
-      <el-menu-item index="issues" v-permission="'admin.edit_player'">
+      <el-menu-item index="/account/admin-edit_player" v-permission="'admin.edit_player'">
         <el-icon><icon-permissions /></el-icon>
         <span>权限管理</span>
       </el-menu-item>
@@ -72,10 +72,14 @@ const collapse = ref(false)
 <style lang="less" scoped>
 .account {
   display: flex;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  // overflow: hidden;
   .content {
     flex: 1;
     padding: 10px;
+    overflow: auto;
+    box-sizing: border-box;
+    height: 100%;
   }
 }
 </style>
