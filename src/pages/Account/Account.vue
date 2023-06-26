@@ -6,6 +6,8 @@ import {
   Experiment as IconExperiment
 } from '@icon-park/vue-next'
 import { ref } from 'vue'
+import vPremission from '@/utils/vPremission'
+
 defineOptions({
   name: 'AccountPage'
 })
@@ -27,6 +29,16 @@ const collapse = ref(false)
         <el-icon><icon-help /></el-icon>
         <span>问题反馈</span>
       </el-menu-item>
+
+      <el-menu-item index="issues" v-premission="'admin.audit'">
+        <el-icon><icon-help /></el-icon>
+        <span>审核</span>
+      </el-menu-item>
+      <el-menu-item index="issues" v-premission="'admin.edit_userinfo'">
+        <el-icon><icon-help /></el-icon>
+        <span>修改用户信息</span>
+      </el-menu-item>
+
       <el-sub-menu index="" title="实验功能" disabled>
         <template #title>
           <el-icon><icon-experiment /></el-icon>
