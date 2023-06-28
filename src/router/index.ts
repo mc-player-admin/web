@@ -56,7 +56,12 @@ const router = createRouter({
         {
           path: 'admin-audit',
           name: 'Audit',
-          component: () => import('@/pages/Account/Admin/Audit.vue')
+          component: () => import('@/pages/Account/Admin/Audit/Audit.vue')
+        },
+        {
+          path: 'admin-edit_player',
+          name: 'edit_player',
+          component: () => import('@/pages/Account/Admin/EditPlayer/EditPlayer.vue')
         }
       ]
     },

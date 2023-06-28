@@ -20,8 +20,8 @@ const collapse = ref(false)
 
 <template>
   <div class="account">
-    <el-menu default-active="" class="account_menu" router :collapse="collapse">
-      <el-menu-item index="">
+    <el-menu default-active="/account/" class="account_menu" router :collapse="collapse">
+      <el-menu-item index="/account/">
         <el-icon><icon-home /></el-icon>
         <span>首页</span>
       </el-menu-item>
@@ -46,7 +46,7 @@ const collapse = ref(false)
         <el-icon><icon-user-business /></el-icon>
         <span>玩家管理</span>
       </el-menu-item>
-      <el-menu-item index="/account/admin-edit_player" v-permission="'admin.edit_player'">
+      <el-menu-item index="/account/admin-edit_permission" v-permission="'admin.edit_permission'">
         <el-icon><icon-permissions /></el-icon>
         <span>权限管理</span>
       </el-menu-item>
@@ -65,7 +65,9 @@ const collapse = ref(false)
       </el-sub-menu>
     </el-menu>
     <div class="content">
-      <router-view></router-view>
+      <Suspense>
+        <router-view></router-view>
+      </Suspense>
     </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { getAudit, type Audit, setAudit } from '@/apis/admin'
-import { type Ref, ref, h, reactive } from 'vue'
-import dayjs from 'dayjs'
+import { ref, h, reactive } from 'vue'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions } from 'element-plus'
 import AuditBox from './AuditBox.vue'
+import { formatDate } from '@/utils/formatDate'
 
 defineOptions({
   name: 'AuditPage'
@@ -11,9 +11,6 @@ defineOptions({
 
 const HOST = '//static-1259453062.cos.ap-shanghai.myqcloud.com/'
 const list = ref<Audit[]>([])
-const formatDate = (value: Ref) => {
-  return dayjs(value.value).format('MM-DD HH:mm:ss')
-}
 
 const init = async () => {
   const { data: res } = await getAudit()
@@ -111,14 +108,23 @@ const audit = async (row: Audit) => {
       </template>
     </el-table-column>
     <el-table-column prop="status" label="审核状态" />
-    <el-table-column prop="date" label="提交日期" :formatter="formatDate" width="125" />
+    <el-table-column
+      prop="date"
+      label="提交日期"
+      :formatter="(value) => formatDate(value.date)"
+      width="125"
+    />
     <el-table-column prop="qq" label="qq" width="110" />
     <el-table-column prop="primary_email" label="邮箱" width="180" />
-    <el-table-column prop="register_date" label="注册时间" :formatter="formatDate" width="125" />
+    <el-table-column
+      prop="register_date"
+      label="注册时间"
+      :formatter="(value) => formatDate(value.register_date)"
+      width="125"
+    />
     <el-table-column prop="primary_permission_group" label="主权限组" />
     <el-table-column fixed="right" label="操作" width="120">
       <template #default="scope">
-        <!-- todo: 操作 -->
         <el-button link type="primary" size="small" @click="audit(scope.row)">审核</el-button>
       </template>
     </el-table-column>
