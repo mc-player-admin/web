@@ -7,6 +7,7 @@ export interface UserInfo {
   register_date: string
   last_login_date?: Date
   primary_permission_group: number
+  avatar: string
 }
 
 export interface permission {

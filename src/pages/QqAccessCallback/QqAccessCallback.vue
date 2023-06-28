@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { login as loginApi } from '@/apis/user'
 import { ElMessage } from 'element-plus'
+import { getUserInfo } from '@/utils/getUserInfo'
 
 const route = useRoute()
 const router = useRouter()
@@ -14,6 +15,7 @@ const login = async () => {
   const { data: res } = await loginApi(code as string, state as string)
   if (res.status == 200) {
     localStorage.setItem('token', res.data.token)
+    await getUserInfo()
     if (res.data.type == 'login') {
       ElMessage.success('登录成功')
       router.replace('/')

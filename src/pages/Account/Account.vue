@@ -79,7 +79,7 @@ const collapse = ref(false)
   // overflow: hidden;
   .content {
     flex: 1;
-    padding: 10px;
+    padding: 8px;
     overflow: auto;
     box-sizing: border-box;
     height: 100%;
