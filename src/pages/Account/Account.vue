@@ -6,7 +6,8 @@ import {
   Experiment as IconExperiment,
   EveryUser as IconEveryUser,
   UserBusiness as IconUserBusiness,
-  Permissions as IconPermissions
+  Permissions as IconPermissions,
+  Audit as IconAudit
 } from '@icon-park/vue-next'
 import { ref } from 'vue'
 import vPermission from '@/utils/vPermission'
@@ -34,7 +35,7 @@ const collapse = ref(false)
       </el-menu-item>
 
       <el-menu-item index="/account/admin-audit" v-permission="'admin.audit'">
-        <el-icon><icon-help /></el-icon>
+        <el-icon><icon-audit /></el-icon>
         <span>审核</span>
       </el-menu-item>
       <el-menu-item index="/account/admin-edit_userinfo" v-permission="'admin.edit_userinfo'">

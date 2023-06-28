@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { getAudit, type Audit } from '@/apis/admin'
-import { type Ref, ref } from 'vue'
+import { getAudit, type Audit, setAudit } from '@/apis/admin'
+import { type Ref, ref, h, reactive } from 'vue'
 import dayjs from 'dayjs'
+import { ElMessage, ElMessageBox, type ElMessageBoxOptions } from 'element-plus'
+import AuditBox from './AuditBox.vue'
 
 defineOptions({
   name: 'AuditPage'
@@ -18,6 +20,63 @@ const init = async () => {
   list.value = res.data
 }
 init()
+
+const audit = async (row: Audit) => {
+  const beforeClose: ElMessageBoxOptions['beforeClose'] = async (action, instance, done) => {
+    // 取消
+    if (action != 'confirm') {
+      return done()
+    }
+    // 提交验证
+    instance.confirmButtonLoading = true
+    if (data.approved == undefined) {
+      ElMessage.warning('请选择结果')
+      instance.confirmButtonLoading = false
+      return
+    }
+    if (data.approved == false && !data.reason) {
+      ElMessage.warning('请输入原因')
+      instance.confirmButtonLoading = false
+      return
+    }
+
+    const { data: res } = await setAudit(row.id, data.approved!, data.reason)
+    if (res.status != 200) {
+      ElMessage.error(`提交失败 errcode:${res.status} ${res.msg}`)
+      instance.confirmButtonLoading = false
+      return
+    }
+    await init()
+    ElMessage.success('提交成功')
+    done()
+  }
+
+  const data = reactive<{
+    approved: boolean | undefined
+    reason: string
+  }>({
+    approved: undefined,
+    reason: ''
+  })
+  ElMessageBox({
+    title: '审核',
+    confirmButtonText: '确定',
+    beforeClose,
+    message: () =>
+      h(AuditBox, {
+        approved: data.approved,
+        reason: data.reason,
+        'onUpdate:approved': (value: boolean | undefined) => {
+          data.approved = value
+        },
+        'onUpdate:reason': (value: string) => {
+          data.reason = value
+        }
+      })
+  }).catch(() => {
+    console.log('取消')
+  })
+}
 </script>
 
 <template>
@@ -58,10 +117,9 @@ init()
     <el-table-column prop="register_date" label="注册时间" :formatter="formatDate" width="125" />
     <el-table-column prop="primary_permission_group" label="主权限组" />
     <el-table-column fixed="right" label="操作" width="120">
-      <template #default>
+      <template #default="scope">
         <!-- todo: 操作 -->
-        <el-button link type="success" size="small">通过</el-button>
-        <el-button link type="warning" size="small">拒绝</el-button>
+        <el-button link type="primary" size="small" @click="audit(scope.row)">审核</el-button>
       </template>
     </el-table-column>
   </el-table>

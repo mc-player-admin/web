@@ -22,3 +22,15 @@ export const getAudit = (): Response<Audit[]> => {
     url: '/admin/audit/get'
   })
 }
+
+export const setAudit = (id: string, approved: boolean, cause: string) => {
+  return request({
+    method: 'post',
+    url: '/admin/audit/set',
+    data: {
+      id,
+      approved,
+      cause
+    }
+  })
+}
