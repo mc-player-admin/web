@@ -25,11 +25,11 @@ const collapse = ref(false)
         <el-icon><icon-home /></el-icon>
         <span>首页</span>
       </el-menu-item>
-      <el-menu-item index="player">
+      <el-menu-item index="/account/player">
         <el-icon><icon-user /></el-icon>
         <span>白名单管理</span>
       </el-menu-item>
-      <el-menu-item index="issues" disabled>
+      <el-menu-item index="/account/issues" disabled>
         <el-icon><icon-help /></el-icon>
         <span>问题反馈</span>
       </el-menu-item>
@@ -76,7 +76,6 @@ const collapse = ref(false)
 .account {
   display: flex;
   height: calc(100vh - 60px);
-  // overflow: hidden;
   .content {
     flex: 1;
     padding: 8px;

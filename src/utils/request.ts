@@ -40,6 +40,12 @@ axios.interceptors.response.use(
   }
 )
 
-export type Response<T = any> = Promise<AxiosResponse<{ status: number; data: T }>>
+export type Response<T = any> = Promise<
+  AxiosResponse<{
+    status: number
+    msg?: string
+    data: T
+  }>
+>
 
 export default axios

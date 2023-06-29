@@ -12,7 +12,7 @@ const user = useUserStore()
 <template>
   <div class="account_user">
     <div class="user">
-      <el-image :src="user.userInfo?.avatar.replace(/^http:/, '')" class="avatar" />
+      <el-image :src="user.userInfo?.avatar?.replace(/^http:/, '')" class="avatar" />
       <div class="info">
         <span class="username">{{ user.userInfo?.username }}</span>
         <div class="info_content">
