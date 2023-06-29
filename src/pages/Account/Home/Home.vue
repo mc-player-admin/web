@@ -1,8 +1,95 @@
 <script setup lang="ts">
 import AccountUser from '@/components/AccountUser/AccountUser.vue'
+import { ElMessageBox } from 'element-plus'
+import { random } from 'lodash'
 defineOptions({
   name: 'AccountPage'
 })
+
+const dontClickEvents = [
+  () => {
+    document.body.animate(
+      [
+        {
+          transform: 'rotate(0) scale(1)'
+        },
+        {
+          transform: 'rotate(360deg) scale(0)'
+        },
+        {
+          transform: 'rotate(0) scale(2)'
+        },
+        {
+          transform: 'rotate(360deg) scale(1)'
+        }
+      ],
+      {
+        duration: 5000,
+        iterations: Infinity
+      }
+    )
+  },
+  () => {
+    document.querySelectorAll('*').forEach((el) => {
+      const randomColor = () => `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
+      const colors = []
+      let i = 100
+      while (i--) {
+        colors.push(randomColor())
+      }
+      el.animate(
+        colors.map((e) => {
+          return {
+            backgroundColor: e
+          }
+        }),
+        {
+          duration: 5000,
+          iterations: Infinity
+        }
+      )
+    })
+  },
+  () => {
+    document.body.addEventListener('mouseover', (e) => {
+      e.stopPropagation()
+      const target = e.target as HTMLElement
+      if (['nav', 'account', 'content'].includes(target.className)) {
+        return
+      }
+      const a = target.getAnimations()
+      if (a.length > 0) {
+        return
+      }
+
+      target.animate(
+        [
+          {
+            transform: `translate(0, 0) rotate(0deg)`
+          },
+          {
+            transform: `translate(0, -1000px) rotate(30deg)`
+          }
+        ],
+        {
+          duration: 10000,
+          fill: 'forwards'
+        }
+      )
+    })
+  }
+]
+const dontClick = async () => {
+  await ElMessageBox({
+    title: '警告',
+    message: '该操作将导致网页产生不可修复的损坏，请勿轻易尝试，是否继续',
+    showCancelButton: true,
+    showClose: false,
+    confirmButtonText: '继续',
+    cancelButtonText: '继续'
+  }).catch(() => {})
+  dontClickEvents[random(0, dontClickEvents.length - 1)]()
+}
 </script>
 
 <template>
@@ -15,8 +102,7 @@ defineOptions({
       <li>常见问题</li>
       <li>问题反馈</li>
       <li>BUG反馈</li>
-      <!-- todo: 千万别点 -->
-      <li>千万别点</li>
+      <li @click="dontClick">千万别点</li>
     </ul>
   </div>
 </template>
