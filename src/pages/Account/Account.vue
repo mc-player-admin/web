@@ -7,15 +7,30 @@ import {
   EveryUser as IconEveryUser,
   UserBusiness as IconUserBusiness,
   Permissions as IconPermissions,
-  Audit as IconAudit
+  Audit as IconAudit,
+  MenuUnfold as IconMenuUnfold
 } from '@icon-park/vue-next'
-import { ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import vPermission from '@/utils/vPermission'
 
 defineOptions({
   name: 'AccountPage'
 })
-const collapse = ref(true)
+const collapse = ref(false)
+
+const resizeEvent = () => {
+  if (document.body.clientWidth < 550) {
+    collapse.value = true
+  } else {
+    collapse.value = false
+  }
+}
+onMounted(() => {
+  window.addEventListener('resize', resizeEvent)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeEvent)
+})
 </script>
 
 <template>
@@ -63,11 +78,19 @@ const collapse = ref(true)
           </el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
+      <el-button
+        class="collapse"
+        :class="collapse ? '' : 'reversal'"
+        @click="collapse = !collapse"
+        link
+      >
+        <icon-menu-unfold size="20" />
+      </el-button>
     </el-menu>
     <div class="content">
-      <Suspense>
+      <suspense>
         <router-view></router-view>
-      </Suspense>
+      </suspense>
     </div>
   </div>
 </template>
@@ -82,6 +105,19 @@ const collapse = ref(true)
     overflow: auto;
     box-sizing: border-box;
     height: 100%;
+  }
+}
+.collapse {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  // bug: 动画不生效
+  transition: all 15.5s;
+  background-color: #fff;
+  &.reversal {
+    transform: rotateZ(180deg);
   }
 }
 </style>

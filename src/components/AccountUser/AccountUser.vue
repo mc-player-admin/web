@@ -12,12 +12,14 @@ const user = useUserStore()
 <template>
   <div class="account_user">
     <div class="user">
-      <el-image :src="user.userInfo?.avatar?.replace(/^http:/, '')" class="avatar" />
+      <el-avatar :src="user.userInfo?.avatar?.replace(/^http:/, '')" class="avatar" />
       <div class="info">
         <span class="username">{{ user.userInfo?.username }}</span>
         <div class="info_content">
           <div class="info_item qq"><icon-tencent-qq /> {{ user.userInfo?.qq }}</div>
-          <div class="info_item email"><icon-mail />{{ user.userInfo?.primary_email }}</div>
+          <div class="info_item email">
+            <icon-mail /><span class="value">{{ user.userInfo?.primary_email }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +42,8 @@ const user = useUserStore()
       border-radius: 50%;
       width: 80px;
       height: 80px;
+      flex-shrink: 0;
+      overflow: hidden;
     }
 
     .info {
@@ -48,9 +52,14 @@ const user = useUserStore()
       flex-direction: column;
       justify-content: space-around;
       margin-left: 8px;
+      width: 0;
+      flex-grow: 1;
       .username {
         font-size: 20px;
         font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       .info_content {
         display: flex;
@@ -59,6 +68,9 @@ const user = useUserStore()
           display: flex;
           align-items: center;
           margin-right: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
