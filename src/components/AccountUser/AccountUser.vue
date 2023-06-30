@@ -20,8 +20,6 @@ const user = useUserStore()
           <div class="info_item email"><icon-mail />{{ user.userInfo?.primary_email }}</div>
         </div>
       </div>
-      <!-- (退出登录) -->
-      <el-button class="edit_info" disabled>修改信息</el-button>
     </div>
   </div>
 </template>
@@ -55,7 +53,8 @@ const user = useUserStore()
       }
       .info_content {
         display: flex;
-        align-items: center;
+        // align-items: center;
+        flex-wrap: wrap;
         .info_item {
           display: flex;
           align-items: center;

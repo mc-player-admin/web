@@ -2,10 +2,14 @@
 import AccountUser from '@/components/AccountUser/AccountUser.vue'
 import { ElMessageBox } from 'element-plus'
 import { random } from 'lodash'
+import { useUserStore } from '@/store/store'
+import { useRouter } from 'vue-router'
 defineOptions({
   name: 'AccountPage'
 })
 
+const user = useUserStore()
+const router = useRouter()
 const dontClickEvents = [
   () => {
     document.body.animate(
@@ -90,6 +94,11 @@ const dontClick = async () => {
   }).catch(() => {})
   dontClickEvents[random(0, dontClickEvents.length - 1)]()
 }
+const logout = () => {
+  user.isLogin = false
+  localStorage.removeItem('token')
+  router.replace('/')
+}
 </script>
 
 <template>
@@ -103,6 +112,7 @@ const dontClick = async () => {
       <li>问题反馈</li>
       <li>BUG反馈</li>
       <li @click="dontClick">千万别点</li>
+      <li @click="logout">退出登录</li>
     </ul>
   </div>
 </template>

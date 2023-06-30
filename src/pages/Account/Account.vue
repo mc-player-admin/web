@@ -15,7 +15,7 @@ import vPermission from '@/utils/vPermission'
 defineOptions({
   name: 'AccountPage'
 })
-const collapse = ref(false)
+const collapse = ref(true)
 </script>
 
 <template>
