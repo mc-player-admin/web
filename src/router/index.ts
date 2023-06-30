@@ -67,6 +67,11 @@ const router = createRouter({
           path: 'admin-edit_player',
           name: 'edit_player',
           component: () => import('@/pages/Account/Admin/EditPlayer/EditPlayer.vue')
+        },
+        {
+          path: 'admin-edit_permission',
+          name: 'edit_permission',
+          component: () => import('@/pages/Account/Admin/EditPermission/EditPermission.vue')
         }
       ]
     },

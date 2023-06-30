@@ -53,3 +53,40 @@ export const rename = (id: number, newName: string) => {
     }
   })
 }
+
+export const getGroups = () => {
+  return request({
+    method: 'post',
+    url: '/admin/editPremission/getGroups'
+  })
+}
+
+export const getPermission = (
+  group: number
+): Response<
+  {
+    id: number
+    group: number
+    name: string
+    value: number
+  }[]
+> => {
+  return request({
+    method: 'post',
+    url: '/admin/editPremission/getPermission',
+    data: {
+      group
+    }
+  })
+}
+export const setPermission = (group: number, name: string, value: boolean) => {
+  return request({
+    method: 'post',
+    url: '/admin/editPremission/setPermission',
+    data: {
+      group,
+      name,
+      value
+    }
+  })
+}
