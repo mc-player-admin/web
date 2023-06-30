@@ -94,10 +94,20 @@ const dontClick = async () => {
   }).catch(() => {})
   dontClickEvents[random(0, dontClickEvents.length - 1)]()
 }
-const logout = () => {
-  user.isLogin = false
-  localStorage.removeItem('token')
-  router.replace('/')
+const logout = async () => {
+  const confirm = await ElMessageBox({
+    title: '警告',
+    message: '确定要退出登录吗',
+    showCancelButton: true,
+    showClose: false,
+    confirmButtonText: '确定',
+    cancelButtonText: '取消'
+  }).catch(() => {})
+  if (confirm == 'confirm') {
+    user.isLogin = false
+    localStorage.removeItem('token')
+    router.replace('/')
+  }
 }
 </script>
 
@@ -106,11 +116,21 @@ const logout = () => {
   <!-- <el-alert title="您还没有完善信息" type="warning" show-icon>完善后才可以申请白名单</el-alert> -->
   <div class="options">
     <ul>
-      <li>玩家查询</li>
-      <li>服务器状态</li>
-      <li>常见问题</li>
-      <li>问题反馈</li>
-      <li>BUG反馈</li>
+      <router-link to="/inquire">
+        <li>玩家查询</li>
+      </router-link>
+      <a href="https://motd.mcxing.cn/detail/2">
+        <li>服务器状态</li>
+      </a>
+      <!-- <li>常见问题</li> -->
+      <a
+        href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Jb1j3C8wbLb2yJ7Z9pgzPbLwrqtpM-7a&authKey=DguX88p4VA1cU%2BCn0OkIVh8zeh3bE7oxmHtOc6bivcuWUabakR7aChso5NsWUb2l&noverify=0&group_code=962663855"
+      >
+        <li>问题反馈</li>
+      </a>
+      <a href="https://github.com/mc-player-admin/web/issues">
+        <li>BUG反馈</li>
+      </a>
       <li @click="dontClick">千万别点</li>
       <li @click="logout">退出登录</li>
     </ul>
@@ -127,12 +147,21 @@ const logout = () => {
   ul {
     display: flex;
     flex-direction: column;
+    a,
+    li {
+      color: #000;
+    }
     li {
       list-style: none;
       height: 45px;
       line-height: 45px;
       padding-left: 15px;
       border-bottom: 1px solid #aaaaaa2a;
+      cursor: pointer;
+      transition: all 0.5s;
+      &:hover {
+        background-color: #eeeeee63;
+      }
     }
   }
 }

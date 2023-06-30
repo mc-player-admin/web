@@ -39,6 +39,7 @@ const user = useUserStore()
     .avatar {
       border-radius: 50%;
       width: 80px;
+      height: 80px;
     }
 
     .info {
@@ -53,7 +54,6 @@ const user = useUserStore()
       }
       .info_content {
         display: flex;
-        // align-items: center;
         flex-wrap: wrap;
         .info_item {
           display: flex;
