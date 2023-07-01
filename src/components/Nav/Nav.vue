@@ -30,9 +30,14 @@ const userStore = useUserStore()
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 1px 1px 2px 1px #f2f2f2;
+  box-shadow: 1px 1px 2px 1px #f2f2f283;
   height: 60px;
   padding: 0 25px;
+  // 首页半透明
+  &[path='/'] {
+    background-color: #ffffff81;
+    text-shadow: -1px 1px 4px #ffffff;
+  }
   .title {
     cursor: pointer;
     display: flex;

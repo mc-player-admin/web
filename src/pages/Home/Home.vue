@@ -1,143 +1,111 @@
 <script lang="ts" setup>
+import { useUserStore } from '@/store/store'
+import {
+  UploadLogs as IconUploadLogs,
+  Helpcenter as IconHelpcenter,
+  GameThree as IconGameThree,
+  Find as IconFind,
+  People as IconPeople
+} from '@icon-park/vue-next'
 defineOptions({
   name: 'HomePage'
 })
+const user = useUserStore()
+
+const SIZE = 60
 </script>
 <template>
   <div class="home">
-    <!-- 申请白名单 -->
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>申请白名单</span>
-          <router-link to="/submit">
-            <el-button type="primary">立即申请</el-button>
-          </router-link>
-        </div>
+    <div class="card_group">
+      <!-- 未登录显示申请白名单 跳转登录界面(登陆后再跳转申请白名单) -->
+      <template v-if="!user.isLogin">
+        <router-link to="/login">
+          <div class="card">
+            申请白名单
+            <icon-upload-logs :size="SIZE" />
+          </div>
+        </router-link>
       </template>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
-        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
-        delectus vero, assumenda impedit praesentium iure.
-      </div>
-    </el-card>
-
-    <!-- 玩家查询 -->
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>玩家查询</span>
-          <router-link to="/inquire">
-            <el-button type="primary">查询信息</el-button>
-          </router-link>
-        </div>
+      <!-- 已登录跳转个人中心 -->
+      <template v-else>
+        <router-link to="/account">
+          <div class="card">
+            个人中心
+            <icon-people :size="SIZE" />
+          </div>
+        </router-link>
       </template>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
-        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
-        delectus vero, assumenda impedit praesentium iure.
-      </div>
-    </el-card>
-
-    <!-- 下载游戏 -->
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>下载游戏</span>
-          <el-button type="primary">立即下载</el-button>
+      <router-link to="/inquire">
+        <div class="card">
+          玩家查询
+          <icon-find :size="SIZE" />
         </div>
-      </template>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
-        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
-        delectus vero, assumenda impedit praesentium iure.
+      </router-link>
+    </div>
+    <div class="card_group">
+      <div class="card">
+        常见问题
+        <icon-helpcenter :size="SIZE" />
       </div>
-    </el-card>
-
-    <!-- 常见问题 -->
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>常见问题</span>
-          <el-button type="primary">进入文档</el-button>
-        </div>
-      </template>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
-        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
-        delectus vero, assumenda impedit praesentium iure.
+      <div class="card">
+        游戏下载
+        <icon-game-three :size="SIZE" />
       </div>
-    </el-card>
-
-    <!-- 状态查询 -->
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>服务器状态</span>
-          <el-button type="primary">查看详细</el-button>
-        </div>
-      </template>
-      <!-- <div>这里或许可以放一个状态的预览？</div> -->
-      <div class="statusiframe">
-        <iframe
-          src="https://motd.mcxing.cn/iframe?id=2&dark=false"
-          width="400"
-          height="130px"
-          frameborder="0"
-        ></iframe>
-      </div>
-    </el-card>
-
-    <!-- 问题反馈 v-if禁用 -->
-    <el-card class="box-card" shadow="hover" v-if="false">
-      <template #header>
-        <div class="card-header">
-          <span>工单支持</span>
-          <el-button type="primary">提交反馈</el-button>
-        </div>
-      </template>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum porro qui labore, facere
-        similique dolor exercitationem voluptate. Quaerat laboriosam iste fuga vitae reiciendis ea
-        delectus vero, assumenda impedit praesentium iure.
-      </div>
-    </el-card>
+    </div>
   </div>
 </template>
 <style lang="less" scoped>
 .home {
-  margin: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 500px);
-  justify-content: center;
-}
-
-// el-card
-.box-card {
-  width: 480px;
-  margin: 20px 10px;
-  .card-header {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(//static-1259453062.cos.ap-shanghai.myqcloud.com/user1/20230701095952-1%E5%9B%BE%E5%B1%82%200.png);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding-top: 100px;
+  box-sizing: border-box;
+  .card_group {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: space-around;
   }
-  .text {
-    font-size: 14px;
-  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-  .item {
-    margin-bottom: 18px;
-  }
-}
+    width: 280px;
+    height: 350px;
 
-// 状态查询
-.statusiframe {
-  user-select: none;
-  border-radius: 3px;
-  overflow: hidden;
-  iframe {
-    width: 100%;
-    height: 100%;
+    margin: 10px;
+    padding: 15px;
+
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+
+    box-sizing: border-box;
+    box-shadow: -5px 5px 10px 0px #ffffff59;
+    border-radius: 10px;
+    background-color: #ffffffbb;
+    cursor: pointer;
+    transition: all 0.5s;
+    .i-icon {
+      color: rgb(114, 114, 114);
+      transition: all 0.5s;
+    }
+    &:hover {
+      transform: translate(0, -10px);
+      box-shadow: -5px 8px 10px 3px #ffffff46;
+      .i-icon {
+        transform: translate(0, -10px);
+      }
+    }
   }
 }
 </style>

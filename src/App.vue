@@ -6,7 +6,7 @@ getUserInfo()
 </script>
 
 <template>
-  <Nav></Nav>
+  <Nav :path="$route.path"></Nav>
   <router-view />
 </template>
 
