@@ -54,6 +54,11 @@ const router = createRouter({
           component: () => import('@/pages/Account/Home/Home.vue')
         },
         {
+          path: 'inquire',
+          name: 'inquire',
+          component: () => import('@/pages/Inquire/Inquire.vue')
+        },
+        {
           path: 'player',
           name: 'Player',
           component: () => import('@/pages/Account/Player/Player.vue')

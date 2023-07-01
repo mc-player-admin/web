@@ -40,6 +40,10 @@ onUnmounted(() => {
         <el-icon><icon-home /></el-icon>
         <span>首页</span>
       </el-menu-item>
+      <el-menu-item index="/account/inquire/">
+        <el-icon><icon-home /></el-icon>
+        <span>玩家查询</span>
+      </el-menu-item>
       <el-menu-item index="/account/player">
         <el-icon><icon-user /></el-icon>
         <span>白名单管理</span>
