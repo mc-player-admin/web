@@ -2,8 +2,8 @@ import sidebar from './config/sidebar'
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Hello VitePress',
-  description: 'Just playing around.',
+  title: 'MC-Player-Admin - 常见问题',
+  description: 'MC-Player-Admin - 常见问题',
   themeConfig: {
     sidebar: sidebar
   },
@@ -17,10 +17,6 @@ export default defineConfig({
           additionalData:
             '@import "../../../src/assets/theme/theme.less"; @import "../theme/main.less";'
         }
-
-        // scss: {
-        //   additionalData: `@use "src/assets/style/element.scss" as *;`
-        // }
       }
     }
   }
