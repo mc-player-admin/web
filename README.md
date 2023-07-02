@@ -1,46 +1,24 @@
-# vue
+<h1 align="center">MC Player Admin</h1>
 
-This template should help get you started developing with Vue 3 in Vite.
+## 介绍
 
-## Recommended IDE Setup
+`MC Player Admin` 是一个免费开源的 `Minecraft` 玩家管理系统，前端使用`vue3` `Typescript`等最新技术栈,适配手机、平板、pc。解决白名单申请、审核、维护麻烦等难题，方便玩家申请白名单，减轻管理人员的工作量，并提供常见问题的文档，也可用于学习参考。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 代码仓库
 
-## Type Support for `.vue` Imports in TS
+[前端(当前仓库)](https://github.com/mc-player-admin/web)
+[后端](https://github.com/mc-player-admin/service)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 使用
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+todo...
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## 项目状态
 
-## Customize configuration
+该项目正在开发中
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## 贡献者
 
-## Project Setup
-
-```sh
-yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-yarn dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
+<a href="https://github.com/mc-player-admin/web/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mc-player-admin/web" />
+</a>
