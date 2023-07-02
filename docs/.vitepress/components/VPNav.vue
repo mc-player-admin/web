@@ -17,7 +17,7 @@ const { switchOpen, open, isOpen } = useSidebar()
         @click="switchOpen"
         :class="isOpen ? 'reversal' : ''"
       />
-      <a href="/">
+      <a href="/" class="app_name">
         <h1>MC-Player-Admin</h1>
       </a>
       <span class="segmentation">|</span>
@@ -67,6 +67,11 @@ header {
     .segmentation {
       margin: 0 10px;
     }
+    .min-width(500px, {
+      .app_name {
+        display: none;
+      }
+    });
   }
 }
 </style>
