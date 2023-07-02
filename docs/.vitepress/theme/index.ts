@@ -3,6 +3,7 @@ import VPApp from '../components/VPApp.vue'
 import NotFound from '../components/NotFound.vue'
 import '../../../src/assets/style/base.less'
 import '../theme/main.less'
+import 'element-plus/dist/index.css'
 
 export default {
   NotFound,

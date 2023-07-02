@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ExpandLeft as IconExpandLeft } from '@icon-park/vue-next'
 import { useSidebar } from '../composables/sidebar'
+import { ElButton } from 'element-plus'
 defineOptions({
   name: 'vp-nav'
 })
@@ -16,7 +17,17 @@ const { switchOpen, open, isOpen } = useSidebar()
         @click="switchOpen"
         :class="isOpen ? 'reversal' : ''"
       />
-      <h1>常见问题</h1>
+      <a href="/">
+        <h1>MC-Player-Admin</h1>
+      </a>
+      <span class="segmentation">|</span>
+      <a href="/docs/">
+        <h1>常见问题</h1>
+      </a>
+    </div>
+    <div class="links">
+      <a href="/"><el-button link>首页</el-button></a>
+      <a href="/docs/"><el-button link>文档</el-button></a>
     </div>
   </header>
 </template>
@@ -32,6 +43,7 @@ header {
   border-bottom: 1px solid #aaaa;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 20px;
   background-image: radial-gradient(transparent 1px, #fff 1px);
   background-size: 4px 4px;
@@ -49,8 +61,11 @@ header {
       }
     }
     h1 {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 600;
+    }
+    .segmentation {
+      margin: 0 10px;
     }
   }
 }
