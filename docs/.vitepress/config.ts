@@ -8,5 +8,19 @@ export default defineConfig({
     sidebar: sidebar
   },
   base: '/docs',
-  outDir: '../dist/docs'
+  outDir: '../dist/docs',
+  vite: {
+    css: {
+      preprocessorOptions: {
+        less: {
+          additionalData:
+            '@import "../../../src/assets/theme/theme.less"; @import "../theme/main.less";'
+        }
+
+        // scss: {
+        //   additionalData: `@use "src/assets/style/element.scss" as *;`
+        // }
+      }
+    }
+  }
 })

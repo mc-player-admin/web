@@ -1,6 +1,8 @@
 import type { Theme } from 'vitepress'
 import VPApp from '../components/VPApp.vue'
 import NotFound from '../components/NotFound.vue'
+import '../../../src/assets/style/base.less'
+import '../theme/main.less'
 
 export default {
   NotFound,
