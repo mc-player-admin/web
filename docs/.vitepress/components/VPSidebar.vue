@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSidebar } from '../composables/sidebar'
+import { useRoute } from 'vitepress'
 
 defineOptions({
   name: 'VPSidebar'
@@ -17,11 +18,24 @@ const display = computed(() => {
     return 'hidden'
   }
 })
+
+const route = useRoute()
+
+const isActive = (path: string) => {
+  return computed(() => {
+    return route.path == path
+  })
+}
 </script>
 
 <template>
   <div class="sidebar" :display="display">
-    <a class="sidebar_item" v-for="i in sidebar" :href="i.link">
+    <a
+      class="sidebar_item"
+      v-for="i in sidebar"
+      :href="i.link"
+      :class="isActive(i.link).value ? 'avtive' : ''"
+    >
       {{ i.text }}
     </a>
   </div>
@@ -51,7 +65,13 @@ const display = computed(() => {
     box-sizing: border-box;
     cursor: pointer;
     &:hover {
-      color: #42b983;
+      color: @primary;
+    }
+    &.avtive {
+      color: @primary;
+      background-color: fadein(@primary, -85%);
+      border-radius: 10px;
+      font-weight: 600;
     }
   }
 }

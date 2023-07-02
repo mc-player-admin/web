@@ -1,5 +1,5 @@
-import { useData, useRoute } from 'vitepress'
-import { onMounted, ref, onUnmounted } from 'vue'
+import { useData } from 'vitepress'
+import { onMounted, ref, onUnmounted, computed } from 'vue'
 
 type SidebarItem = {
   text: string
@@ -23,7 +23,6 @@ const isOpen = ref(true)
 const switchOpen = () => {
   isOpen.value = !isOpen.value
 }
-
 export const useSidebar = () => {
   const { site } = useData()
   const base = site.value.base
