@@ -1,4 +1,4 @@
-import sidebar from './config/sidebar.json'
+import sidebar from './config/sidebar'
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
