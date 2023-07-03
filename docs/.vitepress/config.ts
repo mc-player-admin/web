@@ -5,7 +5,11 @@ export default defineConfig({
   title: 'MC-Player-Admin - 常见问题',
   description: 'MC-Player-Admin - 常见问题',
   themeConfig: {
-    sidebar: sidebar
+    sidebar: sidebar,
+    editLink: {
+      pattern: 'https://github.com/mc-player-admin/web/tree/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    }
   },
   base: '/docs',
   outDir: '../dist/docs',

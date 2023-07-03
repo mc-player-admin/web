@@ -1,8 +1,9 @@
 <script setup>
 import VPSidebar from './VPSidebar.vue'
 import VPNav from './VPNav.vue'
-import DefaultTheme from 'vitepress/theme'
 import { useSidebar } from '../composables/sidebar'
+import VPDocFooter from './VPDocFooter.vue'
+import 'vitepress/theme'
 
 const controls = !location.search.includes('controls=false')
 
@@ -17,6 +18,7 @@ controls && useListenResize()
       <VPNav />
       <div class="content vp-doc" :class="open ? 'open' : ''">
         <Content />
+        <VP-doc-footer />
       </div>
     </div>
   </template>
