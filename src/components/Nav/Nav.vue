@@ -10,13 +10,22 @@ const userStore = useUserStore()
 
 <template>
   <div class="nav">
-    <div class="title" @click="$router.push('/')">
-      <!-- <div class="logo"></div> -->
+    <router-link class="title" to="/">
       <h1>MC-Player-Admin</h1>
-    </div>
-    <div class="loginstatus">
-      <router-link v-if="!userStore.isLogin" to="/login">您好，请登录</router-link>
-      <router-link v-else to="/account">您好，{{ userStore.userInfo?.username }}</router-link>
+    </router-link>
+    <div class="info">
+      <div class="userinfo">
+        <template v-if="userStore.isLogin">
+          <el-avatar class="avatar" :src="userStore.userInfo?.avatar" />
+          <div class="username">{{ userStore.userInfo?.username }}</div>
+        </template>
+        <template v-else>
+          <router-link to="/login"> <el-button type="primary">登录</el-button></router-link>
+        </template>
+      </div>
+      <router-link to="/">首页</router-link>
+      <a href="/docs/">常见问题</a>
+      <router-link to="/account/">个人中心</router-link>
     </div>
   </div>
 </template>
@@ -48,11 +57,25 @@ const userStore = useUserStore()
     }
   }
 
-  .loginstatus {
-    cursor: pointer;
+  .info {
+    // cursor: pointer;
+    display: flex;
+    align-items: center;
+    .userinfo {
+      display: flex;
+      align-items: center;
+      .avatar {
+        height: 38px;
+        width: 38px;
+      }
+      .username {
+        margin-left: 5px;
+        font-size: 16px;
+      }
+    }
     a {
       color: @text-primary-color;
-
+      margin-left: 8px;
       &:hover {
         color: @text-primary-hover-color;
       }
