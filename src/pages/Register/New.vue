@@ -56,7 +56,7 @@ const submitForm = async () => {
       return ElMessage.error('提交失败，' + (res.msg ? res.msg : '请稍后再试'))
     }
     ElMessage.success('提交成功')
-    router.push('/')
+    router.push('/account/player')
   })
 }
 
@@ -78,7 +78,7 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
-    <StepsComponents></StepsComponents>
+    <StepsComponents :step="1" />
     <h1 class="title">完善信息</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />

@@ -146,7 +146,7 @@ const submitForm = (formEl?: FormInstance) => {
       ElMessage.error('提交失败,' + (res.msg ? res.msg : '请稍后再试'))
     }
     ElMessage.success('提交成功，请等待审核')
-    router.push('/')
+    router.push('/account/player')
   })
 }
 </script>
