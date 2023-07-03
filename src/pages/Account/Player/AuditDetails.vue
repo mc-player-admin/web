@@ -38,21 +38,25 @@ const screenshot = computed(() => {
     </div>
     <div class="item">
       <div class="key">粉丝牌截图</div>
-      <div class="value"><el-image :src="screenshot" :preview-src-list="[screenshot]" /></div>
+      <div class="value">
+        <el-image :src="screenshot" fit="contain" :preview-src-list="[screenshot]" />
+      </div>
     </div>
   </div>
   <h2>审核结果</h2>
   <el-tag type="success" v-if="status == 2 && result == 1">审核通过</el-tag>
-  <el-tag type="warning" v-if="status == 2 && result == 2">正在审核</el-tag>
+  <el-tag type="warning" v-if="status == 1">正在审核</el-tag>
   <el-tag type="danger" v-if="status == 2 && result == 2">审核未通过</el-tag>
-  <h2>审核人</h2>
-  <div class="approver">
-    <el-avatar :src="approver_avatar" />
-    <div class="name">{{ approver_username }}</div>
-  </div>
-  <template v-if="cause">
-    <h2>存在问题</h2>
-    <p>{{ cause }}</p>
+  <template v-if="status != 1">
+    <h2>审核人</h2>
+    <div class="approver">
+      <el-avatar :src="approver_avatar" />
+      <div class="name">{{ approver_username }}</div>
+    </div>
+    <template v-if="cause">
+      <h2>存在问题</h2>
+      <p>{{ cause }}</p>
+    </template>
   </template>
 </template>
 
@@ -86,7 +90,7 @@ h2 {
     .value {
       .el-image {
         max-width: 150px;
-        max-height: 100px;
+        height: 150px;
       }
     }
   }

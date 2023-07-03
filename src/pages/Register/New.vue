@@ -55,7 +55,7 @@ const submitForm = async () => {
       return ElMessage.error('提交失败，' + (res.msg ? res.msg : '请稍后再试'))
     }
     ElMessage.success('提交成功')
-    router.push('/')
+    router.push('/account')
   })
 }
 
@@ -86,7 +86,9 @@ const onSendCode = () => {
         <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
         <send-code :qq="form.qq" @on-send-code="onSendCode" />
       </div>
-      <a href="#" class="tips" @click="openDocs({ path: '/收不到验证码' })"> 收不到验证码？ </a>
+      <a href="#" class="tips" v-if="showTips" @click="openDocs({ path: '/收不到验证码' })">
+        收不到验证码？
+      </a>
     </el-form-item>
     <el-form-item label="验证码" prop="code">
       <el-input v-model="form.code" name="code" />

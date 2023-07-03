@@ -76,9 +76,7 @@ const viewDetails = (row: Audit) => {
               <el-tag type="success" v-if="scope.row.status == 2 && scope.row.result == 1"
                 >审核通过</el-tag
               >
-              <el-tag type="warning" v-if="scope.row.status == 2 && scope.row.result == 2"
-                >正在审核</el-tag
-              >
+              <el-tag type="warning" v-if="scope.row.status == 1">正在审核</el-tag>
               <el-tag type="danger" v-if="scope.row.status == 2 && scope.row.result == 2"
                 >审核未通过</el-tag
               >
