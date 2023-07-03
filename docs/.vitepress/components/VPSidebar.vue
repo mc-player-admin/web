@@ -7,7 +7,7 @@ defineOptions({
   name: 'VPSidebar'
 })
 
-const { sidebar, open, isOpen } = useSidebar()
+const { sidebar, open, isOpen, switchOpen } = useSidebar()
 
 const display = computed(() => {
   if (open.value) {
@@ -39,6 +39,8 @@ const isActive = (path: string) => {
       {{ i.text }}
     </a>
   </div>
+  <!-- 移动端展开菜单栏时显示的蒙版遮罩 -->
+  <div class="masking" @click="switchOpen()"></div>
 </template>
 
 <style lang="less" scoped>
@@ -74,5 +76,19 @@ const isActive = (path: string) => {
       font-weight: 600;
     }
   }
+}
+.masking {
+  opacity: 0;
+  transition: all 0.3s;
+}
+.sidebar[display='unfold'] ~ .masking {
+  opacity: 1;
+  width: 100vw;
+  height: calc(100vh - @nav-height);
+  background-color: #000a;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
 }
 </style>
