@@ -2,6 +2,7 @@
 import dayjs from 'dayjs'
 import { type Audit } from '@/apis/audit'
 import { computed } from 'vue'
+import stepsComponents from '@/components/Steps/Steps.vue'
 defineOptions({
   name: 'AuditDetails'
 })
@@ -14,6 +15,12 @@ const screenshot = computed(() => {
 </script>
 
 <template>
+  <!-- 审核通过 -->
+  <stepsComponents :step="4" v-if="status == 2 && result == 1" />
+  <!-- 审核中 -->
+  <stepsComponents :step="3" v-if="status == 2 && result == 2" />
+  <!-- 审核不通过 -->
+  <stepsComponents :step="5" v-if="status == 2 && result == 2" />
   <h2>提交信息</h2>
   <div class="data">
     <div class="item">

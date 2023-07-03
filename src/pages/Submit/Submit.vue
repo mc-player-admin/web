@@ -13,6 +13,7 @@ import {
   submit as submitApi
 } from '@/apis/audit'
 import { useRouter } from 'vue-router'
+import StepsComponents from '@/components/Steps/Steps.vue'
 
 defineOptions({
   name: 'SubmitPage'
@@ -152,6 +153,7 @@ const submitForm = (formEl?: FormInstance) => {
 
 <template>
   <div class="submit">
+    <StepsComponents :step="2" />
     <el-form :model="form" label-position="top" ref="formRef" :rules="rules" status-icon>
       <el-form-item label="qq">
         <el-input :value="user.userInfo?.qq" disabled />

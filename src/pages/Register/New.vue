@@ -5,6 +5,7 @@ import SendCode from '@/components/SendCode/SendCode.vue'
 import { registerNew } from '@/apis/user'
 import { useRouter } from 'vue-router'
 import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
+import StepsComponents from '@/components/Steps/Steps.vue'
 
 // todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
 
@@ -77,6 +78,7 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
+    <StepsComponents></StepsComponents>
     <h1 class="title">完善信息</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />
