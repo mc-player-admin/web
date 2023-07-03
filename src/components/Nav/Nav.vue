@@ -1,11 +1,29 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/store'
+import { useRouter } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 
 defineOptions({
   name: 'AppNav'
 })
-
+const user = useUserStore()
 const userStore = useUserStore()
+const router = useRouter()
+const logout = async () => {
+  const confirm = await ElMessageBox({
+    title: '警告',
+    message: '确定要退出登录吗',
+    showCancelButton: true,
+    showClose: false,
+    confirmButtonText: '确定',
+    cancelButtonText: '取消'
+  }).catch(() => {})
+  if (confirm == 'confirm') {
+    user.isLogin = false
+    localStorage.removeItem('token')
+    router.replace('/')
+  }
+}
 </script>
 
 <template>
@@ -20,12 +38,20 @@ const userStore = useUserStore()
           <div class="username">{{ userStore.userInfo?.username }}</div>
         </template>
         <template v-else>
-          <router-link to="/login"> <el-button type="primary">登录</el-button></router-link>
+          <router-link to="/login" v-if="$route.path != '/login'">
+            <el-button type="primary">登录</el-button></router-link
+          >
+          <router-link to="/" v-if="$route.path != '/'">返回首页</router-link>
         </template>
       </div>
-      <router-link to="/">首页</router-link>
-      <a href="/docs/">常见问题</a>
-      <router-link to="/account/">个人中心</router-link>
+      <div class="btns" v-if="userStore.isLogin">
+        <router-link to="/" v-if="$route.path != '/'">返回首页</router-link>
+        <router-link to="/account" v-if="$route.path.substring(0, 8) != '/account'"
+          >个人中心</router-link
+        >
+        <a href="/docs/">常见问题</a>
+        <a href="javascript:;" @click="logout()" v-if="$route.path != '/account'">退出登录</a>
+      </div>
     </div>
   </div>
 </template>
