@@ -18,7 +18,7 @@ const screenshot = computed(() => {
   <!-- 审核通过 -->
   <stepsComponents :step="4" v-if="status == 2 && result == 1" />
   <!-- 审核中 -->
-  <stepsComponents :step="3" v-if="status == 2 && result == 2" />
+  <stepsComponents :step="3" v-if="status == 1" />
   <!-- 审核不通过 -->
   <stepsComponents :step="5" v-if="status == 2 && result == 2" />
   <h2>提交信息</h2>
