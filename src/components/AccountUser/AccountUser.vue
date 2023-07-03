@@ -16,9 +16,9 @@ const user = useUserStore()
       <div class="info">
         <span class="username">{{ user.userInfo?.username }}</span>
         <div class="info_content">
-          <div class="info_item qq"><icon-tencent-qq /> {{ user.userInfo?.qq }}</div>
+          <div class="info_item qq"><icon-tencent-qq />&nbsp;{{ user.userInfo?.qq }}</div>
           <div class="info_item email">
-            <icon-mail /><span class="value">{{ user.userInfo?.primary_email }}</span>
+            <icon-mail /><span class="value">&nbsp;{{ user.userInfo?.primary_email }}</span>
           </div>
         </div>
       </div>
