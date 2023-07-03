@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, PropType } from 'vue'
-defineOptions({
-  name: 'Steps'
-})
-
 import {
   CircleClose as CircleCloseIcon,
   CircleCheck as CircleCheckIcon
 } from '@element-plus/icons-vue'
+
+defineOptions({
+  name: 'Steps'
+})
+
 const props = defineProps({
   step: {
     type: Number as PropType<number>,
