@@ -10,6 +10,10 @@ export const getUserInfo = async () => {
       userStore.isLogin = true
       userStore.userInfo = res.data.userinfo
       userStore.permission = res.data.permission
+      // 替换 http
+      if (userStore.userInfo?.avatar) {
+        userStore.userInfo.avatar = userStore.userInfo?.avatar?.replace(/^http:/, '')
+      }
     }
   }
 }
