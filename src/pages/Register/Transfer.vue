@@ -5,6 +5,7 @@ import SendCode from '@/components/SendCode/SendCode.vue'
 import { throttle } from 'lodash'
 import { checkName as checkNameApi, registerTransfer } from '@/apis/user'
 import { useRouter } from 'vue-router'
+import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
 
 defineOptions({
   name: 'RegisterNew'
@@ -98,6 +99,13 @@ const submitForm = async () => {
     router.push('/')
   })
 }
+
+const showTips = ref(false)
+const onSendCode = () => {
+  setTimeout(() => {
+    showTips.value = true
+  }, 5000)
+}
 </script>
 
 <template>
@@ -125,10 +133,9 @@ const submitForm = async () => {
     <el-form-item label="邮箱" class="email">
       <div class="email_connect">
         <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
-        <send-code :qq="form.qq" />
+        <send-code :qq="form.qq" @on-send-code="onSendCode" />
       </div>
-      <!-- todo: 发送验证码之后显示 跳转到文档 -->
-      <a href="#" class="tips" v-if="false">收不到验证码？</a>
+      <a href="#" class="tips" @click="openDocs({ path: '/收不到验证码' })"> 收不到验证码？ </a>
     </el-form-item>
     <el-form-item label="验证码" prop="code">
       <el-input v-model="form.code" name="code" />

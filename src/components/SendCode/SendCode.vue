@@ -6,6 +6,7 @@ import { ref } from 'vue'
 defineOptions({
   name: 'SendCode'
 })
+const emit = defineEmits(['onSendCode'])
 const props = defineProps<{
   qq: string | null
 }>()
@@ -22,6 +23,7 @@ const sendCode = async () => {
   loading.value = false
   if (res.status == 200) {
     ElMessage.success('发送成功')
+    emit('onSendCode')
   } else {
     ElMessage.error('发送失败，请稍后再试')
   }

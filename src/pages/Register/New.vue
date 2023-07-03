@@ -4,6 +4,7 @@ import { reactive, ref } from 'vue'
 import SendCode from '@/components/SendCode/SendCode.vue'
 import { registerNew } from '@/apis/user'
 import { useRouter } from 'vue-router'
+import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
 
 // todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
 
@@ -57,6 +58,13 @@ const submitForm = async () => {
     router.push('/')
   })
 }
+
+const showTips = ref(false)
+const onSendCode = () => {
+  setTimeout(() => {
+    showTips.value = true
+  }, 5000)
+}
 </script>
 
 <template>
@@ -76,10 +84,9 @@ const submitForm = async () => {
     <el-form-item label="邮箱" class="email">
       <div class="email_connect">
         <el-input :value="(form.qq || 'qq') + '@qq.com'" name="email" disabled />
-        <send-code :qq="form.qq" />
+        <send-code :qq="form.qq" @on-send-code="onSendCode" />
       </div>
-      <!-- todo: 发送验证码之后显示 跳转到文档 -->
-      <a href="#" class="tips" v-if="false">收不到验证码？</a>
+      <a href="#" class="tips" @click="openDocs({ path: '/收不到验证码' })"> 收不到验证码？ </a>
     </el-form-item>
     <el-form-item label="验证码" prop="code">
       <el-input v-model="form.code" name="code" />
