@@ -42,11 +42,7 @@ const onLoad = () => {
       </div>
     </div>
     <div class="draggable-docs_content" v-loading="loading">
-      <iframe
-        :src="`http://localhost:5173/docs${path}?controls=false`"
-        frameborder="0"
-        @load="onLoad"
-      ></iframe>
+      <iframe :src="`/docs${path}?controls=false`" frameborder="0" @load="onLoad"></iframe>
     </div>
   </div>
 </template>
