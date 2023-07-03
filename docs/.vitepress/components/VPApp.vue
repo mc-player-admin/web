@@ -4,11 +4,10 @@ import VPNav from './VPNav.vue'
 import DefaultTheme from 'vitepress/theme'
 import { useSidebar } from '../composables/sidebar'
 
-const { Layout } = DefaultTheme
-const { open, useListenResize } = useSidebar()
-useListenResize()
-
 const controls = !location.search.includes('controls=false')
+
+const { open, useListenResize } = useSidebar()
+controls && useListenResize()
 </script>
 
 <template>
