@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
+    "@vueuse/core": "^10.2.1",
     "axios": "^1.4.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "dayjs": "^1.11.8",
