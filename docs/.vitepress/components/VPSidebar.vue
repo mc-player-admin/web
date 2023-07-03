@@ -23,7 +23,7 @@ const route = useRoute()
 
 const isActive = (path: string) => {
   return computed(() => {
-    return route.path == path
+    return decodeURI(route.path) == decodeURI(path)
   })
 }
 </script>
@@ -66,6 +66,9 @@ const isActive = (path: string) => {
     padding: 10px 15px;
     box-sizing: border-box;
     cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     &:hover {
       color: @primary;
     }
