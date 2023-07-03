@@ -6,7 +6,7 @@ import { throttle } from 'lodash'
 import { checkName as checkNameApi, registerTransfer } from '@/apis/user'
 import { useRouter } from 'vue-router'
 import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
-import StepsComponents from '@/components/Steps/Steps.vue'
+import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
 
 defineOptions({
   name: 'RegisterNew'
@@ -119,7 +119,7 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
-    <stepsComponents :step="1" />
+    <audit-steps :step="1" />
     <h1 class="title">账号迁移</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />

@@ -2,25 +2,37 @@
 import dayjs from 'dayjs'
 import { type Audit } from '@/apis/audit'
 import { computed } from 'vue'
-import stepsComponents from '@/components/Steps/Steps.vue'
+import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
+
 defineOptions({
   name: 'AuditDetails'
 })
 
 const props = defineProps<Audit>()
+// todo: 动态获取
 const HOST = '//static-1259453062.cos.ap-shanghai.myqcloud.com/'
 const screenshot = computed(() => {
   return `${HOST}${props.screenshot}`
 })
+
+const step = () => {
+  // todo: 返回值可能有误 等明确三种类型后再改
+  if (props.status == 1) {
+    // 通过
+    return 3
+  } else if (props.status == 2 && props.result == 1) {
+    // 审核中
+    return 4
+  } else if (props.status == 2 && props.result == 2) {
+    // 不通过
+    return 5
+  }
+  return 0
+}
 </script>
 
 <template>
-  <!-- 审核通过 -->
-  <stepsComponents :step="4" v-if="status == 2 && result == 1" />
-  <!-- 审核中 -->
-  <stepsComponents :step="3" v-if="status == 2 && result == 2" />
-  <!-- 审核不通过 -->
-  <stepsComponents :step="5" v-if="status == 2 && result == 2" />
+  <audit-steps :step="step" />
   <h2>提交信息</h2>
   <div class="data">
     <div class="item">
