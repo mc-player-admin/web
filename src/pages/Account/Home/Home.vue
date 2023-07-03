@@ -11,58 +11,62 @@ defineOptions({
 const user = useUserStore()
 const router = useRouter()
 const dontClickEvents = [
-  () => {
-    document.body.animate(
-      [
-        {
-          transform: 'rotate(0) scale(1)'
-        },
-        {
-          transform: 'rotate(360deg) scale(0)'
-        },
-        {
-          transform: 'rotate(0) scale(2)'
-        },
-        {
-          transform: 'rotate(360deg) scale(1)'
-        }
-      ],
-      {
-        duration: 5000,
-        iterations: Infinity
-      }
-    )
-  },
-  () => {
-    document.querySelectorAll('*').forEach((el) => {
-      const randomColor = () => `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
-      const colors = []
-      let i = 100
-      while (i--) {
-        colors.push(randomColor())
-      }
-      el.animate(
-        colors.map((e) => {
-          return {
-            backgroundColor: e
-          }
-        }),
-        {
-          duration: 5000,
-          iterations: Infinity
-        }
-      )
-    })
-  },
+  // () => {
+  //   document.body.animate(
+  //     [
+  //       {
+  //         transform: 'rotate(0) scale(1)'
+  //       },
+  //       {
+  //         transform: 'rotate(360deg) scale(0)'
+  //       },
+  //       {
+  //         transform: 'rotate(0) scale(2)'
+  //       },
+  //       {
+  //         transform: 'rotate(360deg) scale(1)'
+  //       }
+  //     ],
+  //     {
+  //       duration: 5000,
+  //       iterations: Infinity
+  //     }
+  //   )
+  // },
+  // () => {
+  //   document.querySelectorAll('*').forEach((el) => {
+  //     const randomColor = () => `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
+  //     const colors = []
+  //     let i = 100
+  //     while (i--) {
+  //       colors.push(randomColor())
+  //     }
+  //     el.animate(
+  //       colors.map((e) => {
+  //         return {
+  //           backgroundColor: e
+  //         }
+  //       }),
+  //       {
+  //         duration: 5000,
+  //         iterations: Infinity
+  //       }
+  //     )
+  //   })
+  // },
   () => {
     document.body.addEventListener('mouseover', (e) => {
       e.stopPropagation()
+      e.preventDefault()
+
       const target = e.target as HTMLElement
       if (['nav', 'account', 'content'].includes(target.className)) {
         return
       }
+
       const a = target.getAnimations()
-      if (a.length > 0) {
+
+      if (a.find((e) => e.id == 'float-animate')) {
         return
       }
 
@@ -77,7 +81,8 @@ const dontClickEvents = [
         ],
         {
           duration: 10000,
-          fill: 'forwards'
+          fill: 'forwards',
+          id: 'float-animate'
         }
       )
     })
