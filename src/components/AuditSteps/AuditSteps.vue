@@ -20,7 +20,7 @@ defineProps<{
     <el-step title="申请白名单" />
     <!-- todo: 明确审核完成后的三种类型 -->
     <el-step title="人工审核" v-if="step < 4" />
-    <el-step title="审核不通过" :icon="CircleCloseIcon" v-if="5" status="error" />
+    <el-step title="审核不通过" :icon="CircleCloseIcon" v-if="step == 5" status="error" />
     <el-step title="审核通过" :icon="CircleCheckIcon" v-if="step == 4" />
   </el-steps>
 </template>

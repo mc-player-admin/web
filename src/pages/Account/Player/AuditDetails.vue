@@ -32,7 +32,7 @@ const step = () => {
 </script>
 
 <template>
-  <audit-steps :step="step" />
+  <audit-steps :step="step()" />
   <h2>提交信息</h2>
   <div class="data">
     <div class="item">
