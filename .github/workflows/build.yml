@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Set environment variable
+        run: echo "VITE_HTTP_BASE_URL=https://mc-player-admin.mcxing.cn/api" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: yarn install
 
