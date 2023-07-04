@@ -4,11 +4,16 @@ import VPNav from './VPNav.vue'
 import { useSidebar } from '../composables/sidebar'
 import VPDocFooter from './VPDocFooter.vue'
 import 'vitepress/theme'
+import { onMounted, ref } from 'vue'
 
-const controls = !location.search.includes('controls=false')
+const controls = ref(false)
 
+onMounted(() => {
+  controls.value = !location.search.includes('controls=false')
+})
+// todo: 处理隐藏控件时滚动报错问题
 const { open, useListenResize } = useSidebar()
-controls && useListenResize()
+useListenResize()
 </script>
 
 <template>
