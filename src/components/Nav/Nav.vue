@@ -1,29 +1,13 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/store'
-import { useRouter } from 'vue-router'
-import { ElMessageBox } from 'element-plus'
+// import Logout from '@/components/Logout/Logout.vue'
+import NavButtons from './NavButtons.vue'
+import { HamburgerButton as IconHamburgerButton } from '@icon-park/vue-next'
 
 defineOptions({
   name: 'AppNav'
 })
 const user = useUserStore()
-const userStore = useUserStore()
-const router = useRouter()
-const logout = async () => {
-  const confirm = await ElMessageBox({
-    title: '警告',
-    message: '确定要退出登录吗',
-    showCancelButton: true,
-    showClose: false,
-    confirmButtonText: '确定',
-    cancelButtonText: '取消'
-  }).catch(() => {})
-  if (confirm == 'confirm') {
-    user.isLogin = false
-    localStorage.removeItem('token')
-    router.replace('/')
-  }
-}
 </script>
 
 <template>
@@ -33,25 +17,31 @@ const logout = async () => {
     </router-link>
     <div class="info">
       <div class="userinfo">
-        <template v-if="userStore.isLogin">
-          <el-avatar class="avatar" :src="userStore.userInfo?.avatar" />
-          <div class="username">{{ userStore.userInfo?.username }}</div>
+        <template v-if="user.isLogin">
+          <el-avatar class="avatar" :src="user.userInfo?.avatar" />
+          <div class="username">{{ user.userInfo?.username }}</div>
         </template>
         <template v-else>
           <router-link to="/login" v-if="$route.path != '/login'">
-            <el-button type="primary">登录</el-button></router-link
-          >
-          <router-link to="/" v-if="$route.path != '/'">返回首页</router-link>
+            <el-button type="primary">登录</el-button>
+          </router-link>
         </template>
       </div>
-      <div class="btns" v-if="userStore.isLogin">
-        <router-link to="/" v-if="$route.path != '/'">返回首页</router-link>
-        <router-link to="/account" v-if="$route.path.substring(0, 8) != '/account'"
-          >个人中心</router-link
-        >
-        <a href="/docs/">常见问题</a>
-        <a href="javascript:;" @click="logout()" v-if="$route.path != '/account'">退出登录</a>
+
+      <div class="button_group_web">
+        <nav-buttons />
       </div>
+
+      <el-popover placement="top" :width="60" trigger="click">
+        <template #reference>
+          <el-button link class="button_group_phone_button">
+            <icon-hamburger-button size="22" />
+          </el-button>
+        </template>
+        <div class="button_group_phone">
+          <nav-buttons />
+        </div>
+      </el-popover>
     </div>
   </div>
 </template>
@@ -99,13 +89,36 @@ const logout = async () => {
         font-size: 16px;
       }
     }
-    a {
-      color: @text-primary-color;
-      margin-left: 8px;
-      &:hover {
-        color: @text-primary-hover-color;
-      }
+  }
+}
+.button_group_phone,
+.button_group_web {
+  :deep(a) {
+    color: @text-primary-color;
+    margin-left: 8px;
+    &:hover {
+      color: @text-primary-hover-color;
     }
   }
 }
+.button_group_phone {
+  display: flex;
+  flex-direction: column;
+  :deep(a) {
+    margin: 3px;
+  }
+}
+.button_group_phone_button {
+  margin-left: 10px;
+  display: none;
+}
+.min-width(550px, {
+  .button_group_phone_button {
+    display: flex
+    
+  }
+  .button_group_web {
+    display: none
+  }
+});
 </style>
