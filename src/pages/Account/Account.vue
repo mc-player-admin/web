@@ -12,11 +12,17 @@ import {
 } from '@icon-park/vue-next'
 import { onMounted, ref, onUnmounted } from 'vue'
 import vPermission from '@/utils/vPermission'
+import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/store/store'
+import { ElMessage } from 'element-plus'
 
 defineOptions({
   name: 'AccountPage'
 })
 const collapse = ref(false)
+const route = useRoute()
+const router = useRouter()
+const user = useUserStore()
 
 const resizeEvent = () => {
   if (document.body.clientWidth < 550) {
@@ -31,6 +37,11 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', resizeEvent)
 })
+
+if (route.path.indexOf('/account') != -1 && !user.isLogin) {
+  ElMessage.warning('请先登录')
+  router.push('/login')
+}
 </script>
 
 <template>
