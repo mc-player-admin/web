@@ -2,58 +2,55 @@
 import AccountUser from '@/components/AccountUser/AccountUser.vue'
 import { ElMessageBox } from 'element-plus'
 import { random } from 'lodash'
-import { useUserStore } from '@/store/store'
-import { useRouter } from 'vue-router'
+import Logout from '@/components/Logout/Logout.vue'
 defineOptions({
   name: 'AccountPage'
 })
 
-const user = useUserStore()
-const router = useRouter()
 const dontClickEvents = [
-  // () => {
-  //   document.body.animate(
-  //     [
-  //       {
-  //         transform: 'rotate(0) scale(1)'
-  //       },
-  //       {
-  //         transform: 'rotate(360deg) scale(0)'
-  //       },
-  //       {
-  //         transform: 'rotate(0) scale(2)'
-  //       },
-  //       {
-  //         transform: 'rotate(360deg) scale(1)'
-  //       }
-  //     ],
-  //     {
-  //       duration: 5000,
-  //       iterations: Infinity
-  //     }
-  //   )
-  // },
-  // () => {
-  //   document.querySelectorAll('*').forEach((el) => {
-  //     const randomColor = () => `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
-  //     const colors = []
-  //     let i = 100
-  //     while (i--) {
-  //       colors.push(randomColor())
-  //     }
-  //     el.animate(
-  //       colors.map((e) => {
-  //         return {
-  //           backgroundColor: e
-  //         }
-  //       }),
-  //       {
-  //         duration: 5000,
-  //         iterations: Infinity
-  //       }
-  //     )
-  //   })
-  // },
+  () => {
+    document.body.animate(
+      [
+        {
+          transform: 'rotate(0) scale(1)'
+        },
+        {
+          transform: 'rotate(360deg) scale(0)'
+        },
+        {
+          transform: 'rotate(0) scale(2)'
+        },
+        {
+          transform: 'rotate(360deg) scale(1)'
+        }
+      ],
+      {
+        duration: 5000,
+        iterations: Infinity
+      }
+    )
+  },
+  () => {
+    document.querySelectorAll('*').forEach((el) => {
+      const randomColor = () => `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}`
+      const colors = []
+      let i = 100
+      while (i--) {
+        colors.push(randomColor())
+      }
+      el.animate(
+        colors.map((e) => {
+          return {
+            backgroundColor: e
+          }
+        }),
+        {
+          duration: 5000,
+          iterations: Infinity
+        }
+      )
+    })
+  },
   () => {
     document.body.addEventListener('mouseover', (e) => {
       e.stopPropagation()
@@ -99,21 +96,6 @@ const dontClick = async () => {
   }).catch(() => {})
   dontClickEvents[random(0, dontClickEvents.length - 1)]()
 }
-const logout = async () => {
-  const confirm = await ElMessageBox({
-    title: '警告',
-    message: '确定要退出登录吗',
-    showCancelButton: true,
-    showClose: false,
-    confirmButtonText: '确定',
-    cancelButtonText: '取消'
-  }).catch(() => {})
-  if (confirm == 'confirm') {
-    user.isLogin = false
-    localStorage.removeItem('token')
-    router.replace('/')
-  }
-}
 </script>
 
 <template>
@@ -137,7 +119,9 @@ const logout = async () => {
         <li>BUG反馈</li>
       </a>
       <li @click="dontClick">千万别点</li>
-      <li @click="logout">退出登录</li>
+      <logout>
+        <li>退出登录</li>
+      </logout>
     </ul>
   </div>
 </template>
