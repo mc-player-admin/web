@@ -15,7 +15,8 @@
     "cz": "git-cz",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:serve": "vitepress serve docs",
+    "build:all": "yarn build & yarn docs:build"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": "prettier --write"
