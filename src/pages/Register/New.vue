@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
 import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
 import { useUserStore } from '@/store/store'
+import { getUserInfo } from '@/utils/getUserInfo'
 
 // todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
 
@@ -64,6 +65,7 @@ const submitForm = async () => {
     if (res.status != 200) {
       return ElMessage.error('提交失败，' + (res.msg ? res.msg : '请稍后再试'))
     }
+    await getUserInfo()
     ElMessage.success('提交成功')
     router.push('/account/player')
   })
