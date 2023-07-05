@@ -70,7 +70,7 @@ const viewDetails = (row: Audit) => {
         <template #default="scope">
           <el-popover effect="light" trigger="hover" placement="top" width="auto">
             <template #default v-if="scope.row.status == 2">
-              <div>审核人: {{ scope.row.approver }}</div>
+              <div>审核人: {{ scope.row.approver_username }}</div>
               <div v-if="scope.row.cause">原因: {{ scope.row.cause }}</div>
             </template>
             <template #reference>
