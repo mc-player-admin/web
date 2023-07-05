@@ -35,6 +35,7 @@ const isActive = (path: string) => {
       v-for="i in sidebar"
       :href="i.link"
       :class="isActive(i.link).value ? 'avtive' : ''"
+      @click="switchOpen()"
     >
       {{ i.text }}
     </a>
