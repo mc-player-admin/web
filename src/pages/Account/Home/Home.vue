@@ -110,13 +110,11 @@ const dontClick = async () => {
         <li>服务器状态</li>
       </a>
       <!-- <li>常见问题</li> -->
-      <a
-        href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Jb1j3C8wbLb2yJ7Z9pgzPbLwrqtpM-7a&authKey=DguX88p4VA1cU%2BCn0OkIVh8zeh3bE7oxmHtOc6bivcuWUabakR7aChso5NsWUb2l&noverify=0&group_code=962663855"
-      >
-        <li>问题反馈</li>
+      <a href="https://github.com/orgs/mc-player-admin/discussions">
+        <li>讨论社区（什么都可以w！）</li>
       </a>
       <a href="https://github.com/mc-player-admin/web/issues">
-        <li>BUG反馈</li>
+        <li>问题反馈（仅接受BUG反馈）</li>
       </a>
       <li @click="dontClick">千万别点</li>
       <logout>
