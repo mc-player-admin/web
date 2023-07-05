@@ -6,7 +6,8 @@ import { throttle } from 'lodash'
 import { checkName as checkNameApi, registerTransfer } from '@/apis/user'
 import { useRouter } from 'vue-router'
 import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
-import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
+// import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
+import { useUserStore } from '@/store/store'
 
 defineOptions({
   name: 'RegisterNew'
@@ -25,6 +26,14 @@ const nameRules = reactive<{
   validateStatus: '',
   error: ''
 })
+
+const user = useUserStore()
+if (!user.isLogin) {
+  router.push('/login')
+}
+if (user.userInfo?.qq) {
+  router.push('/account')
+}
 
 const rules = reactive<FormRules>({
   qq: [
@@ -119,7 +128,7 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
-    <audit-steps :step="1" />
+    <!-- <audit-steps :step="1" /> -->
     <h1 class="title">账号迁移</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />

@@ -6,6 +6,7 @@ import { registerNew } from '@/apis/user'
 import { useRouter } from 'vue-router'
 import { openDocs } from '@/components/DraggableDocs/DraggableDocs'
 import AuditSteps from '@/components/AuditSteps/AuditSteps.vue'
+import { useUserStore } from '@/store/store'
 
 // todo: 备选方案 请求后端配置 无法使用邮件时备选方案上传截图
 
@@ -18,6 +19,14 @@ const form = reactive({
   qq: '',
   code: ''
 })
+
+const user = useUserStore()
+if (!user.isLogin) {
+  router.push('/login')
+}
+if (user.userInfo?.qq) {
+  router.push('/account')
+}
 
 const rules = reactive<FormRules>({
   qq: [
