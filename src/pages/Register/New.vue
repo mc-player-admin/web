@@ -78,7 +78,7 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
-    <audit-steps :step="1" />
+    <audit-steps status="edit_userinfo" />
     <h1 class="title">完善信息</h1>
     <el-alert
       title="提示"

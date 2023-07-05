@@ -18,21 +18,20 @@ const screenshot = computed(() => {
 const step = () => {
   // todo: 返回值可能有误 等明确三种类型后再改
   if (props.status == 1) {
-    // 通过
-    return 3
-  } else if (props.status == 2 && props.result == 1) {
     // 审核中
-    return 4
+    return 'wait'
+  } else if (props.status == 2 && props.result == 1) {
+    // 通过
+    return 'accept'
   } else if (props.status == 2 && props.result == 2) {
     // 不通过
-    return 5
+    return 'deny'
   }
-  return 0
 }
 </script>
 
 <template>
-  <audit-steps :step="step()" />
+  <audit-steps status="status" :type="step()" />
   <h2>提交信息</h2>
   <div class="data">
     <div class="item">

@@ -153,7 +153,7 @@ const submitForm = (formEl?: FormInstance) => {
 
 <template>
   <div class="submit">
-    <audit-steps :step="2" />
+    <audit-steps status="submit" />
     <el-form :model="form" label-position="top" ref="formRef" :rules="rules" status-icon>
       <el-form-item label="qq">
         <el-input :value="user.userInfo?.qq" disabled />
