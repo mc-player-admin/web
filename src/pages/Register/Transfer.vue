@@ -128,7 +128,6 @@ const onSendCode = () => {
     ref="formRef"
     status-icon
   >
-    <!-- <audit-steps :step="1" /> -->
     <h1 class="title">账号迁移</h1>
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />

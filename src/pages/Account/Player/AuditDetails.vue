@@ -16,11 +16,7 @@ const screenshot = computed(() => {
 })
 
 const step = () => {
-  // todo: 返回值可能有误 等明确三种类型后再改
-  if (props.status == 1) {
-    // 审核中
-    return 'wait'
-  } else if (props.status == 2 && props.result == 1) {
+  if (props.status == 2 && props.result == 1) {
     // 通过
     return 'accept'
   } else if (props.status == 2 && props.result == 2) {
@@ -31,7 +27,7 @@ const step = () => {
 </script>
 
 <template>
-  <audit-steps status="status" :type="step()" />
+  <audit-steps :status="props.status == 1 ? 'wait' : 'result'" :type="step()" />
   <h2>提交信息</h2>
   <div class="data">
     <div class="item">
