@@ -33,6 +33,7 @@ const viewDetails = (row: Audit) => {
   ElMessageBox({
     title: '审核详情',
     confirmButtonText: '确定',
+    customClass: 'view_detail',
     message: () => {
       return h(AuditDetails, row)
     }

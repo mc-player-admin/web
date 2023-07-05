@@ -80,7 +80,7 @@ const step = () => {
 </template>
 
 <style>
-.el-message-box {
+.view_detail {
   max-width: 90% !important;
 }
 </style>
