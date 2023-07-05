@@ -12,11 +12,15 @@ import {
 } from '@icon-park/vue-next'
 import { onMounted, ref, onUnmounted } from 'vue'
 import vPermission from '@/utils/vPermission'
+import { useUserStore } from '@/store/store'
+import { useRouter } from 'vue-router'
 
 defineOptions({
   name: 'AccountPage'
 })
 const collapse = ref(false)
+const user = useUserStore()
+const router = useRouter()
 
 const resizeEvent = () => {
   if (document.body.clientWidth < 550) {
@@ -31,6 +35,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', resizeEvent)
 })
+
+if (!user.isLogin) {
+  router.push('/login')
+}
 </script>
 
 <template>

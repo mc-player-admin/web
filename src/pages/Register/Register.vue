@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import { useUserStore } from '@/store/store'
+import { useRouter } from 'vue-router'
 defineOptions({
   name: 'RegisterPage'
 })
+
+const user = useUserStore()
+const router = useRouter()
+if (!user.isLogin) {
+  router.push('/login')
+}
+if (user.userInfo?.qq) {
+  router.push('/account')
+}
 </script>
 
 <template>

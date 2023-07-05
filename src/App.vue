@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import Nav from '@/components/Nav/Nav.vue'
 import { getUserInfo } from '@/utils/getUserInfo'
+import { ElMessage } from 'element-plus'
 
-getUserInfo()
+try {
+  await getUserInfo()
+} catch {
+  ElMessage.error('数据获取失败，请稍后再试')
+}
 </script>
 
 <template>
