@@ -80,6 +80,13 @@ const onSendCode = () => {
   >
     <audit-steps :step="1" />
     <h1 class="title">完善信息</h1>
+    <el-alert
+      title="提示"
+      type="warning"
+      class="warning"
+      description="此页面用于新玩家完善信息申请白名单，提交后无法迁移账号，曾经有白名单的玩家请选择我是老玩家，请谨慎填写"
+      show-icon
+    />
     <el-form-item label="QQ" prop="qq">
       <el-input v-model="form.qq" name="qq" placeholder="请填写qq" />
     </el-form-item>
